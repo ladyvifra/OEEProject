@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrar empresa</title>
+    
+    
     <link rel="stylesheet"href=style.css>
 </head>
 <body>
@@ -94,16 +96,16 @@
         
                                         
         
-                                                <div class="row">
+                                                
                                                     <div class="btn-group" role="group" aria-label="Basic example">
                                                         <div class="row m-2">
-                                                          <button type="submit" class="btn btn-primary">Enviar</button>
+                                                          <button type="submit" class="btn-secundary" id="myBtn">Enviar</button>
                                                         </div>
                                                         <div class="row m-2">
-                                                          <button type="button" class="btn btn-danger">Cancelar</button>
+                                                            <button  type="button" class="btn-secundary" onClick="gfg_Run()">Cancelar</button>
                                                         </div>        
                                                     </div>
-                                                </div>
+                                                
 
                                                 <!-- The Modal -->
                                                 <div id="myModal" class="modal">
@@ -112,20 +114,21 @@
                                                     <div class="modal-content">
                                                     <div class="modal-header">
                                                         <span class="close">&times;</span>
-                                                        <h2>Modal Header</h2>
+                                                        <h2>SMART OEE</h2>
                                                     </div>
-                                                    <div class="modal-body">
-                                                        <p>EStimado usuario, gracias por registrar su empresa</p>
-                                                        <p>A continuación encontrará un usuario y contraseña generada por el sistema.</p>
-                                                        <br> Usuario: adminNombreEmpresa
-                                                        <br> Contrasea: xxxxx
-                                                        <p>Recuerde cambiarla y actuaalizar el perfil al ingresar al sistema</p>
+                                                    <div class="modal-body" id="loginData">
+                                                        <p>Estimado usuario, gracias por registrar su empresa</p>
+                                                        <p>A continuación, encontrará un usuario y contraseña generada por el sistema.</p>
+                                                        <p id="user"> Usuario: <span id="myP">Nombre de la empresa></span></p>
+                                                        <p id="password">Contraseña: <span id="passwordadmin"></span> </p>
+                                                        
+                                                        <h3><a id="login">Inicie sesión</a></H3>
+                                                        <br>
                                                     </div>
                                             
                                                     </div>
-  
-        
-                                            </div>
+
+                                                </div>
                                         </div>
                                     </form>
                                 </div>
