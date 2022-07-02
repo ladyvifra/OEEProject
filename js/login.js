@@ -1,7 +1,7 @@
 "use strict"
 
 document.getElementById('pageName').addEventListener('click',()=>{
-    location.href='./index.html'
+    location.href='./index.php'
 })
 
 function validar()
@@ -11,7 +11,7 @@ function validar()
 
     if(usuario==localStorage.getItem("user")&& pass== localStorage.getItem("password"))
     {
-        location.href='./menu1.html'
+        location.href='./mainMenu.php'
     }
     else{
         alert("Señor usuario, verifique sus datos")

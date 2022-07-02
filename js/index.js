@@ -1,7 +1,7 @@
 "use strict"
 
 document.getElementById('info').addEventListener('click',()=>{
-    location.href='./info.html'
+    location.href='./info.php'
 })
 
 document.getElementById('login').addEventListener('click',()=>{
@@ -11,5 +11,5 @@ document.getElementById('signup').addEventListener('click',()=>{
     location.href='./signup.html'
 })
 document.getElementById('pageName').addEventListener('click',()=>{
-    location.href='./index.html'
+    location.href='./index.php'
 })

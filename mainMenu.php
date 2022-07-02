@@ -1,3 +1,16 @@
+<?php
+
+session_start();
+
+extract($_REQUEST);
+
+if(!isset($_SESSION['user']))
+    header("location:login.php?x=2");
+
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,9 +24,9 @@
     <header>
         <h1 id="pageName">SMART OEE</h1>
         <nav>
-            <a href="menu1.html">Inicio</a>
+            <a href="mainMenu.php">Inicio</a>
             <a href="#">Ayuda</a>
-            <a href="index.html">Salir</a>
+            <a href="logout.php">Salir</a>
             
         </nav>
 
@@ -27,8 +40,8 @@
                         <ul>
                             <li><a href="#">Usuarios</a>
                                 <ul>
-                                    <li><a href="userSignup.html">Registrar usuario</a></li>
-                                    <li><a href="viewUsers.html">Ver usuarios</a></li>
+                                    <li><a href="userSignup.php">Registrar usuario</a></li>
+                                    <li><a href="viewUsers.php">Ver usuarios</a></li>
                                 </ul>
                             </li>
                             <li><a href="#">Parametrización del sistema</a>
@@ -65,7 +78,7 @@
 
             </div>
             <section class="column m2-2">
-                <h2 class="companyName" id="company"> Nombre de la empresa </h2>
+            <h1><?php echo $_SESSION['company'];?></h1>
                 <div class="row-2">
                     <div class="col">
                         <img class="imagen im-m2"  src="assets/john-schnobrich-FlPc9_VocJ4-unsplash.jpg" />
@@ -99,6 +112,6 @@
         <!-- Copyright -->
       </footer>
 
-      <script src="js/menu1.js"></script>
+      
 </body>
 </html>

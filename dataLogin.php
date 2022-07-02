@@ -1,10 +1,16 @@
 <?php
 require "connectiondb.php";
-
-extract ($_GET);
 $objConnection=Connect();
 
+$sql="SELECT us_nickname,us_password,comp_name FROM user 
+INNER JOIN company ON user.comp_nit= company.comp_nit
+WHERE us_nickname= '$_REQUEST[userAdmin]'";
 
+$resultado=$objConnection->query($sql);
+
+
+
+$userAdmin=$resultado->fetch_object();
 
 
 
@@ -33,9 +39,27 @@ $objConnection=Connect();
         <h1 id="pageName">SMART OEE</h1>
     </header>
 
-    <section>
+    <section class="info">
 
-</section>
+    <div id = "showinfo" class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title"><?php echo $userAdmin->comp_name?></h5>
+    <h6 class="card-subtitle mb-2 text-muted">Estimado usuario, gracias por registrarse en nuestra plataforma.</h6>
+    <h6 class="card-subtitle mb-2 text-muted">A continuación encontrará un usuario y contraseña de administrador con los cuales podrá acceder a nuestro sistema</h6>
+    <p class="card-text">Usuario : <?php echo $userAdmin->us_nickname?> </p>
+    
+    <p class="card-text">Contraseña : <?php echo $userAdmin->us_password?> </p>
+    
+    <a href="../OEEProject/login.php" class="card-link">Iniciar sesión</a>
+    <a href="./index.php" class="card-link">Atrás</a>
+  </div>
+</div>
+
+    <p> </p>
+    <p> </p>
+    <p> ></p>
+
+  </section>
 
 
 

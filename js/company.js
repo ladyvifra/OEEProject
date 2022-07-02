@@ -2,7 +2,7 @@ src="jquery-3.6.0.min.js"
 "use strict"
 
 document.getElementById('pageName').addEventListener('click',()=>{
-    location.href='./index.html'
+    location.href='./index.php'
 })
 
 document.getElementById('login').addEventListener('click',()=>{

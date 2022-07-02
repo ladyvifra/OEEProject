@@ -17,9 +17,9 @@
   <header>
     <h1 id="pageName">SMART OEE</h1>
     <nav>
-        <a href="menu1.html">Inicio</a>
+        <a href="mainMenu.php">Inicio</a>
         <a href="#">Ayuda</a>
-        <a href="index.html">Salir</a>
+        <a href="index.php">Salir</a>
         
     </nav>
 
@@ -34,7 +34,7 @@
                             <li><a href="#">Usuarios</a>
                                 <ul>
                                     <li><a href="userSignup.html">Registrar usuario</a></li>
-                                    <li><a href="viewUsers.html">Ver usuarios</a></li>
+                                    <li><a href="viewUsers.php">Ver usuarios</a></li>
                                 </ul>
                             </li>
                             <li><a href="#">Parametrización del sistema</a>

@@ -59,7 +59,7 @@
                          
                 </article>
             </section>
-                <button onclick="location.href='./index.html'" type="button">
+                <button onclick="location.href='./index.php'" type="button">
                 Volver</button>
                         
                     

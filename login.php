@@ -15,13 +15,23 @@
 <div class="main-component mt-5">
 <section class="form-login">
     <h2>INICIO DE SESIÓN</h2>
-    <!-- <form action="login.html" method="$_POST">-->
-    <input id="user" class="controls" type="text" name="Usuario" value=""placeholder="Ingrese su usuario">
-    <input id= "password" class="controls"type="password" name="Password" value=""placeholder="Ingrese su contraseña">
-    <input class="buttons"type="submit" name="" value="Ingresar" onclick="validar()"> 
+    <form id ="form1" name="form1" action="validateLogin.php" method="$_POST">-->
+    <input id="user" class="controls" type="text" name="user" value=""placeholder="Ingrese su usuario" required/>
+    <input id= "password" class="controls"type="password" name="password" value=""placeholder="Ingrese su contraseña"required/>
+    <input class="buttons"type="submit" name="submit" value="Ingresar"> 
     <p><a href="#">¿Olvidaste tu contraseña?</a></p>
-    <p><a href="companySignup.html">Registra tu empresa</a></p>
+    <p><a href="companySignup.php">Registra tu empresa</a></p>
     </form>
+
+    <?php
+      if($x==1)
+        echo"<br> <p align='center'> Usuario no registrado con los datos ingresados, vuelva a intentarlo";
+      if($x==2)
+        echo"<br> <p align='center'> Señor usuario, debe iniciar sesión para ingresar al sistema";
+      if($x==3)
+        echo"<br> <p align='center'> El usuario ha cerrado la sesión";
+
+    ?>
 </section>
  </div>
 
@@ -37,6 +47,6 @@
       </footer>
    
 
-      <script src="js/login.js"></script>
+      
 </body>
 </html>

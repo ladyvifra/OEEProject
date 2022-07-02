@@ -40,7 +40,11 @@ nav a:hover{
 
 }
 
+
+
 */*info*/
+
+
 
 .main-container-info .column{
     width: 1000px;
@@ -296,6 +300,12 @@ footer {
 
   .card m-2{
       padding: 25px;
+  }
+
+  /*shwo data*/
+  #showdata{
+    text-align: center;
+    width: 50rem;
   }
 
   /*signup company*/

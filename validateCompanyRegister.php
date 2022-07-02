@@ -35,14 +35,14 @@ function generatePassword()
 
 function generateUser($companyName){
 
-    $user = "admin".$companyName;
+    $user = "admin".substr($companyName,0,3);
     return $user;
 }
 
 $passwordAdmin=generatePassword();
 $userAdmin=generateUser($companyName);
 
-echo $passwordAdmin." ".$userAdmin;
+//echo $passwordAdmin." ".$userAdmin;
 
 
 
@@ -55,18 +55,14 @@ VALUES
 $result2= $objConnection->query($sql2);
 
 
+
+
 //validar error exitoso retorne a la página anterior
 
-if 
+if ($result2)
+    header("location:dataLogin.php?userAdmin=$userAdmin");
+else
+    echo "Se presentó un problema en el registro, intente nuevamente";
 
 
-
-
-       
-            
-
-echo "<script>";
-echo "alert('Datos no encontrados de la fecha');";
-echo "window.close();";
-echo "</script>";
 ?>

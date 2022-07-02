@@ -32,13 +32,13 @@
                         <div class="col-m">
                             <img class="rounded-circle info"src="assets/info.jpg" id="info">
                             <p>
-                                <a class="btn-secundary" href="../OEEProject/info.html" role="button">Información</a>
+                                <a class="btn-secundary" href="../OEEProject/info.php" role="button">Información</a>
                             </p>
                         </div>
                         <div class="col-m">
                             <img class="rounded-circle"src="assets/open-laptop-with-log-it-glasses-office-supplies.jpg" name="login">
                             <p>
-                                <a class="btn-secundary" href="../OEEProject/login.html" role="button" id="login">Ingresar</a>
+                                <a class="btn-secundary" href="../OEEProject/login.php" role="button" id="login">Ingresar</a>
                             </p>
                         </div>
                         <div class="col-m">
