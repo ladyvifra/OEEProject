@@ -7,7 +7,15 @@ require "connectiondb.php";
 
 $objectConnection = Connect();
 
-echo $_SESSION['companyNit']
+$sql="SELECT bran_id, bran_name FROM branch b INNER JOIN  company c ON b.comp_nit=c.comp_nit
+WHERE b.comp_nit='$_SESSION[companyNit]'";
+ 
+$result=$objectConnection->query($sql);
+
+
+echo $_SESSION['companyNit'];
+
+        
 
 
 ?>
@@ -41,7 +49,7 @@ echo $_SESSION['companyNit']
                         <ul>
                             <li><a href="#">Usuarios</a>
                                 <ul>
-                                    <li><a href="userSignup.html">Registrar usuario</a></li>
+                                    <li><a href="userSignup.php">Registrar usuario</a></li>
                                     <li><a href="viewUsers.php">Ver usuarios</a></li>
                                 </ul>
                             </li>
@@ -79,11 +87,19 @@ echo $_SESSION['companyNit']
 
             </div>
             <section class="column m2-2">
-                <h2 class="companyName" id="company"> Nombre de la empresa </h2>
+                <h2 class="companyName" id="company"> <?php echo $_SESSION['company'];?></h2>
+
+                <?php
+       $x=isset($_REQUEST['user']);
+      if($x=='fail'){  
+        echo "<h3 style='color:red'>No se ha podido registar el usuario, verifique los campos </h3>";
+          }
+
+    ?>
                 <h3 class="companyName"> Registrar nuevo usuario </h3>
                 <div class="row-2">
-                    <form role="form" v-on:submit.prevent="createPatient">
-                        <div class="row">
+                    <form role="form" name="formUser" method="post" action = "validateUserForm.php">
+                    <div class="row">
                             <div class="col-md-5">
                                 <div class="card m-2">
                                     <div class="card-body">
@@ -92,18 +108,18 @@ echo $_SESSION['companyNit']
                                             <label for="numeroIdentificacion">
                                                 Número de identificación
                                             </label>
-                                                <input type="text" class="form-control" id="identification" />
+                                                <input name= "identification" type="text" class="form-control" id="identification" />
 <br>
-                                                <label for="numeroIdentificacion">
+                                                <label for="name">
                                                     Nombres
                                                 </label>
-                                                <input type="text" class="form-control" id="Nombres">
+                                                <input name ="name"type="text" class="form-control" id="Nombres">
                                                 <br>
 
-                                                <label for="numeroIdentificacion">
+                                                <label for="lastName">
                                                     Apellidos
                                                 </label>
-                                                <input type="text" class="form-control" id="Apellidos">
+                                                <input name = "lastName" type="text" class="form-control" id="Apellidos">
                                             </div>
                                                     
                                                 
@@ -117,16 +133,21 @@ echo $_SESSION['companyNit']
                                                     </label>
                                                     <div class="form-check">
                                             
-                                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                                        <input value= 2 class="form-check-input" type="radio" name="role" id="role">
                                                         <label class="form-check-label" for="flexRadioDefault1">
                                                         Supervisor
                                                         </label>
                                                     </div>
 
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                                                        <input value= 1 class="form-check-input" type="radio" name="role" id="role" checked>
                                                         <label class="form-check-label" for="flexRadioDefault2">
                                                         Operario
+
+                                                    <div class="form-check">
+                                                    <input value= 3 class="form-check-input" type="radio" name="role" id="role" checked>
+                                                    <label class="form-check-label" for="flexRadioDefault2">
+                                                        Administrador
                                                         
                                                         </label>
                                                         
@@ -139,12 +160,20 @@ echo $_SESSION['companyNit']
                                                         Sucursal
                                                     </label>
                             
-                                                <select class="Sucursal">
-                                                    <option value="1">Sucursal 1</option>
-                                                    <option value="2">Sucursal 2</option>
-                                                    <option value="3">Sucursal 3</option>
-                                                    <option value="4">Sucursal 4</option>
-                                                </select>
+                                                    <select name="branch" id="branch" class="Sucursal">
+                                                    <option value="0">Seleccione</option>
+                                                    <?php
+                                                        while($branch=$result->fetch_object())
+
+                                                        {
+                                                            ?>
+                                                        <option value="<?php echo $branch->bran_id; ?>"><?php echo $branch->bran_name;?></option>
+                                                    <?php    
+                                                    }
+                                                        ?>
+
+   
+</select>
                                                 </div>
                                             </div>
                                         </div>
@@ -153,12 +182,12 @@ echo $_SESSION['companyNit']
                                             <label for="userTelephone">
                                                 Número de contacto
                                             </label>
-                                            <input type="text"class="form-control" id="nit" />
+                                            <input name ="telephone" type="text"class="form-control" id="nit" />
                                             <br>
                                             <label for="email">
                                                 Correo electrónico
                                             </label>
-                                            <input  type="text" class="form-control" id="email"/> 
+                                            <input  name = "email" type="text" class="form-control" id="email"/> 
                                         </div>
                                         
                             
@@ -168,14 +197,14 @@ echo $_SESSION['companyNit']
                                                 <!-- Email input -->
                                                  <div class="form-outline mb-4">
                                                     <label class="form-label" for="form3Example3">Usuario</label>
-                                                    <input type="username" id="form3Example3" class="form-control" />
+                                                    <input name = "username" type="username" id="form3Example3" class="form-control" />
                                                      
                                                 </div>
 
                                                 <!-- Password input -->
                                                 <div class="form-outline mb-4">
                                                     <form action="" name="f1">
-                                                        Contraseña: <input type="password" name="clave1" size="20">
+                                                        Contraseña: <input name = "password" type="password" name="clave1" size="20">
                                                         <br>
                                                         Repite contraseña: <input type="password" name="clave2" size="20">
                                                         <br>
@@ -193,10 +222,10 @@ echo $_SESSION['companyNit']
                                             <div class="row m-2">
                                                 <div class="btn-group" role="group" aria-label="Basic example">
                                                     <div class="row m-2">
-                                                    <button type="submit" class="btn btn-primary">Enviar</button>
+                                                    <button name= "submit" type="submit" class="btn btn-primary">Enviar</button>
                                                     </div>
                                                     <div class="row m-2">
-                                                    <button type="button" class="btn btn-danger" >Cancelar</button>
+                                                    <button type="button" class="btn btn-danger" onClick="window.location='mainMenu.php'">Cancelar</button>
                                                     </div>        
                                                 </div>
                                             </div>

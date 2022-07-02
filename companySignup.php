@@ -77,7 +77,7 @@
                                                           <button type="submit" class="btn-secundary" id="myBtn">Enviar</button>
                                                         </div>
                                                         <div class="row m-2">
-                                                            <button  type="button" class="btn-secundary" onClick="gfg_Run()">Cancelar</button>
+                                                            <button  type="button" class="btn-secundary" onClick="window.location='index.php'">Cancelar</button>
                                                         </div>        
                                                     </div>
                                                 

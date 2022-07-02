@@ -29,6 +29,7 @@ if($exist==1)
     $user=$result->fetch_object();
     $_SESSION['user']=$user->us_nickname;
     $_SESSION['company']=$user->comp_name;
+    $_SESSION['companyNit']=$user->comp_nit;
     header("location:mainMenu.php?");
 
 }

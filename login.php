@@ -24,12 +24,16 @@
     </form>
 
     <?php
-      if($x==1)
+       $x=isset($_REQUEST['x']);
+      if($x==1){  
         echo"<br> <p align='center'> Usuario no registrado con los datos ingresados, vuelva a intentarlo";
-      if($x==2)
-        echo"<br> <p align='center'> Señor usuario, debe iniciar sesión para ingresar al sistema";
-      if($x==3)
+      }else if($x==2){
+         echo"<br> <p align='center'> Señor usuario, debe iniciar sesión para ingresar al sistema";
+      }else if($x==3){
         echo"<br> <p align='center'> El usuario ha cerrado la sesión";
+       }else{
+         echo '';
+       }
 
     ?>
 </section>

@@ -32,6 +32,14 @@ if(!isset($_SESSION['user']))
 
     </header>
 
+    <?php
+       $x=isset($_REQUEST['user']);
+      if($x){  
+        echo "<script>alert('El usuario se ha registrado correctamente')</script>";
+          }
+
+    ?>
+
     <div class="main-component">
         <div class="row m2">
             <div class="column m2-1">
