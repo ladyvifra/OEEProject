@@ -1,3 +1,32 @@
+<?php
+session_start();
+require "connectiondb.php";
+
+extract($_REQUEST);
+if(!isset($_REQUEST['x']))
+  $x=0;
+
+  $objConnection= Connect();
+//búsqueda supervisores
+ $sql= "SELECT us_document, us_name, us_lastname, us_status, bran_name FROM user u
+  LEFT JOIN company c ON c.comp_nit= u.comp_nit
+  LEFT JOIN branch b ON b.bran_id= u.bran_id
+    WHERE (u.us_role = 2) AND (u.comp_nit='$_SESSION[companyNit]')";
+//búsqueda operarios
+$sql2= "SELECT us_document, us_name, us_lastname, us_status, bran_name FROM user u
+  LEFT JOIN company c ON c.comp_nit= u.comp_nit
+  LEFT JOIN branch b ON b.bran_id= u.bran_id
+    WHERE (u.us_role = 1) AND (u.comp_nit='$_SESSION[companyNit]')";
+
+  
+  $result1=$objConnection->query($sql);
+  $result2=$objConnection->query($sql2);
+
+ 
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -297,34 +326,35 @@
                                         </tr>
                                       </thead>
                                       <tbody>
+
+                                      <?php
+                                          
+                                          while($user =$result2->fetch_object())
+                                          {
+                                          ?>
                                         <tr>
-                                          <td>Pepita</td>
-                                          <td>Mendieta</td>
-                                          <td>Kennedy</td>
-                                           <td>2011/04/25</td>
-                                          <td>Activo</td>
+                                        <td><?php echo $user->us_name ?></td>
+                                        <td><?php echo $user->us_lastname ?></td>
+                                        <td><?php if($user->bran_name==NULL){
+                                                echo "--";
+                                        }else{
+                                          echo $user->bran_name;
+                                        }
+                                        
+                                        ?></td>
+                                        <td><?php echo "---" ?></td>
+                                        <td><?php if($user->us_status==1){
+                                                echo "Activo";
+                                        }else{
+                                          echo "Inactivo";
+                                        }
+                                        
+                                        ?></td>
                                         </tr>
-                                        <tr>
-                                            <td>Juan Andrés</td>
-                                            <td>Perez</td>
-                                            <td>Bosa</td>
-                                             <td>2011/04/25</td>
-                                            <td>Activo</td>
-                                          </tr>
-                                          <tr>
-                                            <td>Lorena Andrea</td>
-                                            <td>Perez</td>
-                                            <td>Funza</td>
-                                             <td>2011/04/25</td>
-                                            <td>Activo</td>
-                                          </tr>
-                                          <tr>
-                                            <td>Ronald</td>
-                                            <td>Rojas</td>
-                                            <td>Kennedy</td>
-                                             <td>2011/04/25</td>
-                                            <td>Activo</td>
-                                          </tr>
+                                        <?php
+                                          }
+                                          
+                                          ?>
                                           
                                         
                                       </tbody>
@@ -556,29 +586,34 @@
                                         </tr>
                                       </thead>
                                       <tbody>
+                                      <?php
+                                          
+                                          while($user =$result1->fetch_object())
+                                          {
+                                          ?>
                                         <tr>
-                                          <td>Gloria</td>
-                                          <td>Andrade</td>
-                                          <td>Kennedy</td>
-                                           <td>2011/04/25</td>
-                                          <td>Activo</td>
+                                        <td><?php echo $user->us_name ?></td>
+                                        <td><?php echo $user->us_lastname ?></td>
+                                        <td><?php if($user->bran_name==NULL){
+                                                echo "--";
+                                        }else{
+                                          echo $user->bran_name;
+                                        }
+                                        
+                                        ?></td>
+                                        <td><?php echo "---" ?></td>
+                                        <td><?php if($user->us_status==1){
+                                                echo "Activo";
+                                        }else{
+                                          echo "Inactivo";
+                                        }
+                                        
+                                        ?></td>
                                         </tr>
-                                        <tr>
-                                            <td>Carlos Andrés</td>
-                                            <td>Suárez</td>
-                                            <td>Bosa</td>
-                                             <td>2011/04/25</td>
-                                            <td>Activo</td>
-                                          </tr>
-                                          <tr>
-                                            <td>Guillermo</td>
-                                            <td>Daza</td>
-                                            <td>Funza</td>
-                                             <td>2011/04/25</td>
-                                            <td>Activo</td>
-                                          </tr>
+                                        <?php
+                                          }
                                           
-                                          
+                                          ?>
                                         
                                       </tbody>
                                       
