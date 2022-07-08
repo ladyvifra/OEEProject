@@ -8,19 +8,24 @@ if(!isset($_REQUEST['x']))
 
   $objConnection= Connect();
 //búsqueda supervisores
- $sql= "SELECT us_document, us_name, us_lastname, us_status, bran_name FROM user u
+ $sql= "SELECT us_document, us_name, us_lastname, us_status, bran_name,MAX(login_date) AS lastDate FROM user u
   LEFT JOIN company c ON c.comp_nit= u.comp_nit
   LEFT JOIN branch b ON b.bran_id= u.bran_id
-    WHERE (u.us_role = 2) AND (u.comp_nit='$_SESSION[companyNit]')";
+  LEFT JOIN login l ON l.us_id= u.us_id
+    WHERE (u.us_role = 2) AND (u.comp_nit='$_SESSION[companyNit]')
+   GROUP BY u.us_id";
 //búsqueda operarios
-$sql2= "SELECT us_document, us_name, us_lastname, us_status, bran_name FROM user u
+$sql2= "SELECT us_document, us_name, us_lastname, us_status, bran_name,MAX(login_date) AS lastDate FROM user u
   LEFT JOIN company c ON c.comp_nit= u.comp_nit
   LEFT JOIN branch b ON b.bran_id= u.bran_id
-    WHERE (u.us_role = 1) AND (u.comp_nit='$_SESSION[companyNit]')";
+  LEFT JOIN login l ON l.us_id= u.us_id
+    WHERE (u.us_role = 1) AND (u.comp_nit='$_SESSION[companyNit]')
+    GROUP BY u.us_id";
 
   
   $result1=$objConnection->query($sql);
   $result2=$objConnection->query($sql2);
+
 
  
 
@@ -100,7 +105,7 @@ $sql2= "SELECT us_document, us_name, us_lastname, us_status, bran_name FROM user
 
             </div>
             <section class="column m2-2">
-              <h2 class="companyName" id="company"> Nombre de la empresa </h2>
+              <h1><?php echo $_SESSION['company'];?></h1>
                 
                 <div class="row-2">
 
@@ -342,7 +347,7 @@ $sql2= "SELECT us_document, us_name, us_lastname, us_status, bran_name FROM user
                                         }
                                         
                                         ?></td>
-                                        <td><?php echo "---" ?></td>
+                                        <td><?php echo $user->lastDate ?></td>
                                         <td><?php if($user->us_status==1){
                                                 echo "Activo";
                                         }else{
@@ -601,7 +606,7 @@ $sql2= "SELECT us_document, us_name, us_lastname, us_status, bran_name FROM user
                                         }
                                         
                                         ?></td>
-                                        <td><?php echo "---" ?></td>
+                                        <td><?php echo $user->lastDate ?></td>
                                         <td><?php if($user->us_status==1){
                                                 echo "Activo";
                                         }else{
