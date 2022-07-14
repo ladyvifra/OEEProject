@@ -5,7 +5,7 @@ session_start();
 extract($_REQUEST);
 
 if(!isset($_SESSION['user']))
-    header("location:login.php?x=2");
+    header("location:login/login.php?x=2");
 
 
 ?>
@@ -26,7 +26,7 @@ if(!isset($_SESSION['user']))
         <nav>
             <a href="mainMenu.php">Inicio</a>
             <a href="#">Ayuda</a>
-            <a href="logout.php">Salir</a>
+            <a href="login/logout.php">Salir</a>
             
         </nav>
 
@@ -48,8 +48,8 @@ if(!isset($_SESSION['user']))
                         <ul>
                             <li><a href="#">Usuarios</a>
                                 <ul>
-                                    <li><a href="userSignup.php">Registrar usuario</a></li>
-                                    <li><a href="viewUsers.php">Ver usuarios</a></li>
+                                    <li><a href="users/userSignup.php">Registrar usuario</a></li>
+                                    <li><a href="users/viewUsers.php">Ver usuarios</a></li>
                                 </ul>
                             </li>
                             <li><a href="#">Parametrización del sistema</a>

@@ -1,6 +1,6 @@
 <?php
 session_start();
-require "connectiondb.php";
+require "../connectiondb.php";
 extract($_REQUEST);
 $objConnection=Connect();
 
@@ -26,7 +26,7 @@ $result = $objConnection->query($sql);
 
 if($result){
    // echo "<script>alert('El usuario se ha registrado correctamente')</script>";
-    header('location:mainMenu.php?user=true');
+    header('location:../mainMenu.php?user=true');
 }else
 {
     //echo "<script>alert('Se ha presentado un problema al registrar usuario') </sript>";

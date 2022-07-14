@@ -2,6 +2,6 @@
     session_start();
     session_unset();
     session_destroy();
-    header('location:index.php?x=3');
+    header('location:../index.php?x=3');
 
 ?>

@@ -38,13 +38,13 @@
                         <div class="col-m">
                             <img class="rounded-circle"src="assets/open-laptop-with-log-it-glasses-office-supplies.jpg" name="login">
                             <p>
-                                <a class="btn-secundary" href="../OEEProject/login.php" role="button" id="login">Ingresar</a>
+                                <a class="btn-secundary" href="../OEEProject/login/login.php" role="button" id="login">Ingresar</a>
                             </p>
                         </div>
                         <div class="col-m">
                             <img class="rounded-circle"src="assets/cova-software-SdlsfstOQZM-unsplash.jpg" name="signup">
                             <p>
-                                <a class="btn-secundary" href="../OEEProject/companySignup.php" role="button" id="signup">Registre su empresa</a>
+                                <a class="btn-secundary" href="../OEEProject/company/companySignup.php" role="button" id="signup">Registre su empresa</a>
                             </p>
                         </div>
 

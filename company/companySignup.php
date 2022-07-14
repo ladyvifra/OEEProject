@@ -12,7 +12,7 @@
     <title>Registrar empresa</title>
     
     
-    <link rel="stylesheet"href=style.css>
+    <link rel="stylesheet"href=../style.css>
 </head>
 <body>
 <div id="app" class="app">
@@ -77,7 +77,7 @@
                                                           <button type="submit" class="btn-secundary" id="myBtn">Enviar</button>
                                                         </div>
                                                         <div class="row m-2">
-                                                            <button  type="button" class="btn-secundary" onClick="window.location='index.php'">Cancelar</button>
+                                                            <button  type="button" class="btn-secundary" onClick="window.location='../index.php'">Cancelar</button>
                                                         </div>        
                                                     </div>
                                                 

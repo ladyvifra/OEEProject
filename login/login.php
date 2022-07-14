@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LOGIN</title>
-    <link rel="stylesheet"href=style.css>
+    <link rel="stylesheet"href=../style.css>
 </head>
 <body>
 <header>
@@ -20,7 +20,7 @@
     <input id= "password" class="controls"type="password" name="password" value=""placeholder="Ingrese su contraseña"required/>
     <input class="buttons"type="submit" name="submit" value="Ingresar"> 
     <p><a href="#">¿Olvidaste tu contraseña?</a></p>
-    <p><a href="companySignup.php">Registra tu empresa</a></p>
+    <p><a href="../company/companySignup.php">Registra tu empresa</a></p>
     </form>
 
     <?php

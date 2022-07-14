@@ -3,7 +3,7 @@
 session_start();
 
 extract($_REQUEST);
-require "connectiondb.php";
+require "../connectiondb.php";
 
 $objectConnection = Connect();
 
@@ -27,15 +27,15 @@ echo $_SESSION['companyNit'];
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio</title>
-    <link rel="stylesheet"href=style.css>
+    <link rel="stylesheet"href=../style.css>
 </head>
 <body>
     <header>
         <h1 id="pageName">SMART OEE</h1>
         <nav>
-            <a href="mainMenu.php">Inicio</a>
+            <a href="../mainMenu.php">Inicio</a>
             <a href="#">Ayuda</a>
-            <a href="index.php">Salir</a>
+            <a href="../index.php">Salir</a>
             
         </nav>
 
@@ -225,7 +225,7 @@ echo $_SESSION['companyNit'];
                                                     <button name= "submit" type="submit" class="btn btn-primary">Enviar</button>
                                                     </div>
                                                     <div class="row m-2">
-                                                    <button type="button" class="btn btn-danger" onClick="window.location='mainMenu.php'">Cancelar</button>
+                                                    <button type="button" class="btn btn-danger" onClick="window.location='../mainMenu.php'">Cancelar</button>
                                                     </div>        
                                                 </div>
                                             </div>

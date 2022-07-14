@@ -1,6 +1,6 @@
 <?php
 session_start();
-require "connectiondb.php";
+require "../connectiondb.php";
 
 extract($_REQUEST);
 if(!isset($_REQUEST['x']))
@@ -45,15 +45,15 @@ $sql2= "SELECT u.us_id, us_document, us_name, us_lastname, us_status, bran_name,
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.min.js"></script>
 
-    <link rel="stylesheet"href=style.css>
+    <link rel="stylesheet"href=../style.css>
 </head>
 <body>
   <header>
     <h1 id="pageName">SMART OEE</h1>
     <nav>
-        <a href="mainMenu.php">Inicio</a>
+        <a href="../mainMenu.php">Inicio</a>
         <a href="#">Ayuda</a>
-        <a href="index.php">Salir</a>
+        <a href="../index.php">Salir</a>
         
     </nav>
 
@@ -67,7 +67,7 @@ $sql2= "SELECT u.us_id, us_document, us_name, us_lastname, us_status, bran_name,
                         <ul>
                             <li><a href="#">Usuarios</a>
                                 <ul>
-                                    <li><a href="userSignup.html">Registrar usuario</a></li>
+                                    <li><a href="userSignup.php">Registrar usuario</a></li>
                                     <li><a href="viewUsers.php">Ver usuarios</a></li>
                                 </ul>
                             </li>

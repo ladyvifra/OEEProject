@@ -1,5 +1,5 @@
 <?php
-require "connectiondb.php";
+require "../connectiondb.php";
 extract ($_REQUEST);
 //header('location: userAdmin.php?usu=$userAdmin');
 
@@ -60,7 +60,7 @@ $result2= $objConnection->query($sql2);
 //validar error exitoso retorne a la página anterior
 
 if ($result2)
-    header("location:dataLogin.php?userAdmin=$userAdmin");
+    header("location:../login/dataLogin.php?userAdmin=$userAdmin");
 else
     echo "Se presentó un problema en el registro, intente nuevamente";
 

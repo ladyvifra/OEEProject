@@ -3,7 +3,7 @@
 session_start();
 
 extract($_REQUEST);
-require "connectiondb.php";
+require "../connectiondb.php";
 $objConnection = Connect();
 
 $sql="SELECT u.us_id, u.us_nickname, u.us_password, c.comp_name, u.comp_nit
@@ -27,7 +27,7 @@ if($exist==1)
     $_SESSION['user']=$user->us_nickname;
     $_SESSION['company']=$user->comp_name;
     $_SESSION['companyNit']=$user->comp_nit;
-    header("location:mainMenu.php?");
+    header("location:../mainMenu.php?");
     $idUser = $user->us_id;
     $sql2 ="INSERT INTO login (us_id) VALUES($idUser)";
 
