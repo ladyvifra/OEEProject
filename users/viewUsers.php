@@ -8,14 +8,16 @@ if(!isset($_REQUEST['x']))
 
   $objConnection= Connect();
 //búsqueda supervisores
- $sql= "SELECT u.us_id, us_name, us_lastname, us_document,us_email, us_contactNumber, us_nickname, us_password, us_role, us_status, bran_name,MAX(login_date) AS 
+ $sql= "SELECT u.us_id, us_name, us_lastname, us_document,us_email, us_contactNumber, us_nickname, us_password, rol_name, us_status, bran_name,MAX(login_date) AS 
  lastDate FROM user u LEFT JOIN company c ON c.comp_nit= u.comp_nit
+  LEFT JOIN role r ON r.rol_id= u.us_role
   LEFT JOIN branch b ON b.bran_id= u.bran_id
   LEFT JOIN login l ON l.us_id= u.us_id
     WHERE (u.us_role = 2) AND (u.comp_nit='$_SESSION[companyNit]')
-   GROUP BY u.us_id";
+    GROUP BY u.us_id";
 //búsqueda operarios
-$sql2= "SELECT u.us_id, us_name, us_lastname, us_document,us_email, us_contactNumber, us_nickname, us_password, us_role, us_status, bran_name,MAX(login_date) AS lastDate FROM user u
+$sql2= "SELECT u.us_id, us_name, us_lastname, us_document,us_email, us_contactNumber, us_nickname, us_password, rol_name, us_status, bran_name,MAX(login_date) AS lastDate FROM user u
+  LEFT JOIN role r ON r.rol_id= u.us_role
   LEFT JOIN company c ON c.comp_nit= u.comp_nit
   LEFT JOIN branch b ON b.bran_id= u.bran_id
   LEFT JOIN login l ON l.us_id= u.us_id
@@ -319,7 +321,7 @@ $sql2= "SELECT u.us_id, us_name, us_lastname, us_document,us_email, us_contactNu
                                         
                                         ?></td>
                                         <td align="center"><a  id= "modal_view_user "class ="link_view view_user" user = "<?php echo 
-                                        $user->us_id."//".$user->us_name."//".$user->us_lastname."//".$user->us_document."//".$user->us_role."//".
+                                        $user->us_id."//".$user->us_name."//".$user->us_lastname."//".$user->us_document."//".$user->rol_name."//".
                                         $user->bran_name."//".$user->us_email."//".$user->us_contactNumber."//".$user->us_nickname.
                                         "//".$user->us_password."//".$user->us_status
                                        ;?>" 
@@ -608,7 +610,12 @@ $sql2= "SELECT u.us_id, us_name, us_lastname, us_document,us_email, us_contactNu
                                         }
                                         
                                         ?></td>
-                                        <td align="center"><a href="viewUserRegister.php?us_id=<?php echo $user->us_id?>">
+                                        <td align="center"><a  id= "modal_view_user "class ="link_view view_user" user = "<?php echo 
+                                        $user->us_id."//".$user->us_name."//".$user->us_lastname."//".$user->us_document."//".$user->rol_name."//".
+                                        $user->bran_name."//".$user->us_email."//".$user->us_contactNumber."//".$user->us_nickname.
+                                        "//".$user->us_password."//".$user->us_status
+                                       ;?>" 
+                                        href="#" data-toggle="modal" data-target="#modalAdd" data-dismiss="modal" data-backdrop="false">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
                                         <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
                                         <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
