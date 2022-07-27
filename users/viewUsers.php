@@ -7,27 +7,46 @@ if(!isset($_REQUEST['x']))
   $x=0;
 
   $objConnection= Connect();
+
+//búsqueda sucursales
+
+$sql3="SELECT bran_id, bran_name FROM branch b INNER JOIN  company c ON b.comp_nit=c.comp_nit
+WHERE b.comp_nit='$_SESSION[companyNit]'";
+
 //búsqueda supervisores
  $sql= "SELECT u.us_id, us_name, us_lastname, us_document,us_email, us_contactNumber, us_nickname, us_password, rol_name, us_status, bran_name,MAX(login_date) AS 
- lastDate FROM user u LEFT JOIN company c ON c.comp_nit= u.comp_nit
+ lastDate FROM user u 
+ LEFT JOIN company c ON c.comp_nit= u.comp_nit
   LEFT JOIN role r ON r.rol_id= u.us_role
   LEFT JOIN branch b ON b.bran_id= u.bran_id
   LEFT JOIN login l ON l.us_id= u.us_id
     WHERE (u.us_role = 2) AND (u.comp_nit='$_SESSION[companyNit]')
     GROUP BY u.us_id";
 //búsqueda operarios
-$sql2= "SELECT u.us_id, us_name, us_lastname, us_document,us_email, us_contactNumber, us_nickname, us_password, rol_name, us_status, bran_name,MAX(login_date) AS lastDate FROM user u
+$sql2= "SELECT u.us_id, us_name, us_lastname, us_document,us_email, us_contactNumber, us_nickname, us_password, rol_name, us_status, bran_name,MAX(login_date) AS 
+lastDate FROM user u
+LEFT JOIN company c ON c.comp_nit= u.comp_nit
   LEFT JOIN role r ON r.rol_id= u.us_role
-  LEFT JOIN company c ON c.comp_nit= u.comp_nit
   LEFT JOIN branch b ON b.bran_id= u.bran_id
   LEFT JOIN login l ON l.us_id= u.us_id
     WHERE (u.us_role = 1) AND (u.comp_nit='$_SESSION[companyNit]')
     GROUP BY u.us_id";
 
-  
+
+ 
+  $result3=$objConnection->query($sql3);
   $result1=$objConnection->query($sql);
   $result2=$objConnection->query($sql2);
 
+  
+  $arrayBranch=0;
+
+while ($branch = mysqli_fetch_assoc($result3)) {
+  $arrayBranch []= $branch; 
+}
+
+/*Aquí puedes ver tu resultado*/
+//print_r ($arrayBranch); //La salida aquí es sólo para depurar.
 
 ?>
 
@@ -56,15 +75,18 @@ $sql2= "SELECT u.us_id, us_name, us_lastname, us_document,us_email, us_contactNu
     <nav>
         <a href="../mainMenu.php">Inicio</a>
         <a href="#">Ayuda</a>
-        <a href="../index.php">Salir</a>
+        <a href="../login/logout.php">Salir</a>
         
     </nav>
 
 </header>
 
-<?php include '../modals.php';?> 
+<?php include '../modalViewUser.php';?> 
+<?php include '../modalEditUser.php';?> 
+
 
     <div class="main-component">
+   
         <div class="row m2">
             <div class="column m2-1">
                 <div class="menu-container">
@@ -111,10 +133,12 @@ $sql2= "SELECT u.us_id, us_name, us_lastname, us_document,us_email, us_contactNu
             </div>
             <section class="column m2-2">
               <h1><?php echo $_SESSION['company'];?></h1>
+              
                 
                 <div class="row-2">
 
                     <div class="tabs">
+                      <!--Operarios-->
                         <div class="tab">
                           <input type="radio" name="css-tabs" id="tab-1" checked class="tab-switch">
                           <label for="tab-1" class="tab-label">Operarios</label>
@@ -127,7 +151,7 @@ $sql2= "SELECT u.us_id, us_name, us_lastname, us_document,us_email, us_contactNu
                                        
                                       </div>
                                     </div>
-                                    <!--Modal-->
+                                    <!--botonesModal-->
                                     <div class="row d-flex justify-content-center modalWrapper">
                                     
                                   
@@ -135,132 +159,7 @@ $sql2= "SELECT u.us_id, us_name, us_lastname, us_document,us_email, us_contactNu
                                         <a href="userSignup.php" class="btn btn-info btn-rounded btn-sm" data-toggle="modal" data-target="#modalAdd" data-dismiss="modal" data-backdrop="false">Nuevo usuario<i
                                             class="fas fa-plus-square ml-1"></i></a>
                                       </div>
-                                    <!--Modal editar usuario-->
-                                          <!--Modal editar usuario-->
-    <div class="modal fade modalEditClass" id="modalEdit" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header text-center">
-                    <h4 class="modal-title w-100 font-weight-bold text-secondary ml-5">Editar registro</h4>
-                        <button type="button" class="close text-secondary" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                </div>
-                                            
-                <div class="modal-body mx-3">
-                    <div class="md-form mb-5">
-                        <input type="text" id="formIdEdit" class="form-control validate">
-                            <label data-error="wrong" data-success="right" for="formNameEdit">Identificación</label>
-                    </div>
-
-                    <div class="md-form mb-5">
-                        <input type="text" id="formNameEdit" class="form-control validate">
-                        <label data-error="wrong" data-success="right" for="formNameEdit">Nombres</label>
-                    </div>
-
-                    <div class="md-form mb-5">
-                        <input type="text" id="formLastNameEdit" class="form-control validate">
-                            <label data-error="wrong" data-success="right" for="formNameEdit">Apellidos</label>
-                    </div>
-                                  
-                    <div class="md-form mb-5">
-                        <div class="form-check">
-                            <input class="form-check-input" id="flexRadioDefault1" type="radio" name="flexRadioDefault">
-                            <label class="form-check-label" for="flexRadioDefault">"Supervisor"</label>
-                        </div>
-
-                        <div class="form-check">
-                            <input class="form-check-input" id="flexRadioDefault2" type="radio" name="flexRadioDefault">
-                            <label class="form-check-label" for="flexRadioDefault">"Operario"</label>
-                        </div>
-                                                
-                        <label data-error="wrong" data-success="right" for="formPositionEdit">Rol</label>
-                    </div>
-                                  
-                    <div class="md-form mb-5">
-                        <label data-error="wrong" data-success="right" for="formOfficeEdit">Planta</label>
-                            <select class="Branch">
-                                <option value="1">Sucursal1</option>
-                                <option value="1">Sucursal2</option>
-                                <option value="1">Sucursal3</option>
-                                <option value="1">Sucursal4</option>
-                            </select>
-                    </div>
-
-                    <div class="md-form mb-5">
-                        <input type="date" id="inputDate" class="form-control" placeholder="Select Date">
-                        <label data-error="wrong" data-success="right" for="inputDate"></label>
-                    </div>
-                                  
-                    <div class="md-form mb-5">
-                        <input type="text" id="userTelephoneEdit" class="form-control validate">
-                        <label data-error="wrong" data-success="right" for="userTelephoneEdit" >Número de contacto</label>
-                    </div>
-
-                    <div class="md-form mb-5">
-                        <input type="text" id="userEmail" class="form-control validate">
-                        <label data-error="wrong" data-success="right" for="userEmail" >Correo electrónico</label>
-                    </div>
-
-                    <div class="md-form mb-5">
-                        <input type="text" id="userUsername" class="form-control validate">
-                        <label data-error="wrong" data-success="right" for="userUsername" >Usuario</label>
-                    </div>
-
-                    <div class="md-form mb-5">
-                        <input type="text" id="userPassword" class="form-control validate">
-                        <label data-error="wrong" data-success="right" for="userPassword" >Contraseña</label>
-                    </div>
-                </div>
-                
-                <div class="modal-footer d-flex justify-content-center editInsideWrapper">
-                    <button class="btn btn-outline-secondary btn-block editInside" data-dismiss="modal">Editar registro
-                        <i class="fas fa-paper-plane-o ml-1"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-                                  
-    <div class="text-center buttonEditWrapper">
-        <button class="btn btn-info btn-rounded btn-sm buttonEdit" data-toggle="modal" data-target="#modalEdit"
-        >Editar registro<i class="fas fa-pencil-square-o ml-1"></i></a>
-    </div>
-                                  
-                                      <!--Eliminar usuario-->
-                                      
-                                  
-                                      <div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="modalDelete"
-                                        aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                          <div class="modal-content">
-                                            <div class="modal-header text-center">
-                                              <h4 class="modal-title w-100 font-weight-bold ml-5 text-danger">Eliminar</h4>
-                                              <button type="button" class="close text-danger" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                              </button>
-                                            </div>
-                                            <div class="modal-body mx-3">
-                                              <p class="text-center h4">¿Está seguro de que desea eliminar el registro del usuario xxxxx?</p>
-                                  
-                                            </div>
-                                            <div class="modal-footer d-flex justify-content-center deleteButtonsWrapper">
-                                              <button type="button" class="btn btn-danger btnYesClass" id="btnYes" data-dismiss="modal">Sí</button>
-                                              <button type="button" class="btn btn-primary btnNoClass" id="btnNo" data-dismiss="modal">No</button>
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                  
-                                      <div class="text-center">
-                                        <button class="btn btn-danger btn-sm btn-rounded buttonDelete" data-toggle="modal" disabled data-target="#modalDelete"
-                                          disabled>Eliminar<i class="fas fa-times ml-1"></i></a>
-                                      </div>
-
-                                      <div class="text-center">
-                                        <button class="btn btn-danger btn-sm btn-rounded buttonView" data-toggle="modal" disabled data-target="#modalDelete"
-                                          disabled>Ver Registro<i class="fas fa-times ml-1"></i></a>
-                                      </div>
+                                    
                                     </div>
                                   
                                     <!--Tabla de usuarios-->
@@ -331,12 +230,19 @@ $sql2= "SELECT u.us_id, us_name, us_lastname, us_document,us_email, us_contactNu
                                         <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
                                       </svg></td>
 
-
-                                        <td align="center"><a href="updateUser.php?us_id=<?php echo $user->us_id?>">
+                                      
+                                      <td align="center"><a  id= "modal_view_user "class ="link_view edit_user" user = "<?php echo 
+                                        $user->us_id."//".$user->us_name."//".$user->us_lastname."//".$user->us_document."//".$user->rol_name."//".
+                                        $user->bran_name."//".$user->us_email."//".$user->us_contactNumber."//".$user->us_nickname.
+                                        "//".$user->us_password."//".$user->us_status
+                                       ;?>" 
+                                       
+                                        href="updateUser.php?us_id=<?php echo $user->us_id?>"data-toggle="modal" data-target="#modalEdit" data-dismiss="modal" data-backdrop="false">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                                         <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
                                         <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
                                           </svg></td>
+
                                         <td align="center"><a href="deleteUser.php?us_id=<?php echo $user->us_id?>">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-archive" viewBox="0 0 16 16">
                                         <path d="M0 2a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1v7.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 1 12.5V5a1 1 0 0 1-1-1V2zm2 3v7.5A1.5 1.5 0 0 0 3.5 14h9a1.5 1.5 0 0 0 1.5-1.5V5H2zm13-3H1v2h14V2zM5 7.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>
@@ -356,6 +262,7 @@ $sql2= "SELECT u.us_id, us_name, us_lastname, us_document,us_email, us_contactNu
                               </div>
                           </div>
                         </div>
+                        <!--Supervisores-->
                         <div class="tab">
                           <input type="radio" name="css-tabs" id="tab-2" class="tab-switch">
                           <label for="tab-2" class="tab-label">Supervisores</label>
@@ -423,136 +330,13 @@ $sql2= "SELECT u.us_id, us_name, us_lastname, us_document,us_email, us_contactNu
                                         <a href="" class="btn btn-info btn-rounded btn-sm" data-toggle="modal" data-target="#modalAdd">Nuevo usuario<i
                                             class="fas fa-plus-square ml-1"></i></a>
                                       </div>
-                                    <!--Modal editar usuario-->
-                                      <div class="modal fade modalEditClass" id="modalEdit" tabindex="-1" role="dialog" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                          <div class="modal-content">
-                                            <div class="modal-header text-center">
-                                              <h4 class="modal-title w-100 font-weight-bold text-secondary ml-5">Editar registro</h4>
-                                              <button type="button" class="close text-secondary" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                              </button>
-                                            </div>
-                                            
-                                            <div class="modal-body mx-3">
-
-                                                <div class="md-form mb-5">
-                                                    <input type="text" id="formIdEdit" class="form-control validate">
-                                                    <label data-error="wrong" data-success="right" for="formNameEdit">Identificación</label>
-                                                  </div>
-
-                                              <div class="md-form mb-5">
-                                                <input type="text" id="formNameEdit" class="form-control validate">
-                                                <label data-error="wrong" data-success="right" for="formNameEdit">Nombres</label>
-                                              </div>
-
-                                              <div class="md-form mb-5">
-                                                <input type="text" id="formLastNameEdit" class="form-control validate">
-                                                <label data-error="wrong" data-success="right" for="formNameEdit">Apellidos</label>
-                                              </div>
-                                  
-                                              <div class="md-form mb-5">
-                                                  <div class="form-check">
-                                                    <input class="form-check-input" id="flexRadioDefault1" type="radio" name="flexRadioDefault">
-                                                    <label class="form-check-label" for="flexRadioDefault">"Supervisor"</label>
-                                                  </div>
-
-                                                  <div class="form-check">
-                                                    <input class="form-check-input" id="flexRadioDefault2" type="radio" name="flexRadioDefault">
-                                                    <label class="form-check-label" for="flexRadioDefault">"Operario"</label>
-                                                  </div>
-                                                
-                                                <label data-error="wrong" data-success="right" for="formPositionEdit">Rol</label>
-                                              </div>
-                                  
-                                              <div class="md-form mb-5">
-                                                <label data-error="wrong" data-success="right" for="formOfficeEdit">Planta</label>
-                                                <select class="Branch">
-                                                    <option value="1">Sucursal1</option>
-                                                    <option value="1">Sucursal2</option>
-                                                    <option value="1">Sucursal3</option>
-                                                    <option value="1">Sucursal4</option>
-                                                </select>
-                                              </div>
-                                  
                                     
-                                  
-                                              <div class="md-form mb-5">
-                                                <input type="date" id="inputDate" class="form-control" placeholder="Select Date">
-                                                <label data-error="wrong" data-success="right" for="inputDate"></label>
-                                              </div>
-                                  
-                                              <div class="md-form mb-5">
-                                                <input type="text" id="userTelephoneEdit" class="form-control validate">
-                                                <label data-error="wrong" data-success="right" for="userTelephoneEdit" >Número de contacto</label>
-                                              </div>
-
-                                              <div class="md-form mb-5">
-                                                <input type="text" id="userEmail" class="form-control validate">
-                                                <label data-error="wrong" data-success="right" for="userEmail" >Correo electrónico</label>
-                                              </div>
-
-                                              <div class="md-form mb-5">
-                                                <input type="text" id="userUsername" class="form-control validate">
-                                                <label data-error="wrong" data-success="right" for="userUsername" >Usuario</label>
-                                              </div>
-
-                                              <div class="md-form mb-5">
-                                                <input type="text" id="userPassword" class="form-control validate">
-                                                <label data-error="wrong" data-success="right" for="userPassword" >Contraseña</label>
-                                              </div>
-                                  
-                                  
-                                            </div>
-                                            <div class="modal-footer d-flex justify-content-center editInsideWrapper">
-                                              <button class="btn btn-outline-secondary btn-block editInside" data-dismiss="modal">Editar registro
-                                        
-                                                <i class="fas fa-paper-plane-o ml-1"></i>
-                                              </button>
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                  
-                                      <!--Eliminar usuario-->
-                                      <div class="text-center buttonEditWrapper">
-                                        <button class="btn btn-info btn-rounded btn-sm buttonEdit" data-toggle="modal" data-target="#modalEdit"
-                                          disabled>Editar registro<i class="fas fa-pencil-square-o ml-1"></i></a>
-                                      </div>
-                                  
-                                      <div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="modalDelete"
-                                        aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                          <div class="modal-content">
-                                            <div class="modal-header text-center">
-                                              <h4 class="modal-title w-100 font-weight-bold ml-5 text-danger">Eliminar</h4>
-                                              <button type="button" class="close text-danger" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                              </button>
-                                            </div>
-                                            <div class="modal-body mx-3">
-                                              <p class="text-center h4">¿Está seguro de que desea eliminar el registro del usuario xxxxx?</p>
-                                  
-                                            </div>
-                                            <div class="modal-footer d-flex justify-content-center deleteButtonsWrapper">
-                                              <button type="button" class="btn btn-danger btnYesClass" id="btnYes" data-dismiss="modal">Sí</button>
-                                              <button type="button" class="btn btn-primary btnNoClass" id="btnNo" data-dismiss="modal">No</button>
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
                                   
                                       <div class="text-center">
                                         <button class="btn btn-danger btn-sm btn-rounded buttonDelete" data-toggle="modal" disabled data-target="#modalDelete"
                                           disabled>Eliminar<i class="fas fa-times ml-1"></i></a>
                                       </div>
 
-                                      <div class="text-center">
-                                        <button class="btn btn-danger btn-sm btn-rounded buttonView" data-toggle="modal" disabled data-target="#modalDelete"
-                                          disabled>Ver Registro<i class="fas fa-times ml-1"></i></a>
-                                      </div>
-                                    </div>
-                                  
                                     <!--Tabla de usuarios-->
                                     <table id="dtBasicExample" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                       <thead>
@@ -620,7 +404,12 @@ $sql2= "SELECT u.us_id, us_name, us_lastname, us_document,us_email, us_contactNu
                                         <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
                                         <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
                                       </svg></td>
-                                        <td align="center"><a href="updateUser.php?us_id=<?php echo $user->us_id?>">
+                                      <td align="center"><a  id= "modal_view_user "class ="link_view edit_user" user = "<?php echo 
+                                        $user->us_id."//".$user->us_name."//".$user->us_lastname."//".$user->us_document."//".$user->rol_name."//".
+                                        $user->bran_name."//".$user->us_email."//".$user->us_contactNumber."//".$user->us_nickname.
+                                        "//".$user->us_password."//".$user->us_status
+                                       ;?>" 
+                                        href="updateUser.php?us_id=<?php echo $user->us_id?>"data-toggle="modal" data-target="#modalEdit" data-dismiss="modal" data-backdrop="false">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                                         <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
                                         <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>

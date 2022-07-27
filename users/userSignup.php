@@ -35,7 +35,7 @@ echo $_SESSION['companyNit'];
         <nav>
             <a href="../mainMenu.php">Inicio</a>
             <a href="#">Ayuda</a>
-            <a href="../index.php">Salir</a>
+            <a href="../login/logout.php">Salir</a>
             
         </nav>
 

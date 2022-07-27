@@ -1,7 +1,7 @@
 <!--Modal ver usuario-->
 
 <link rel="stylesheet" type="text/css" href="../modals.css">  
-<script src="../js/functions.js"></script>
+
 <div class="modal fade addNewInputs" id="modalAdd" tabindex="-1" role="dialog" aria-labelledby="modalAdd"
   aria-hidden="true">
   <script>
@@ -35,15 +35,10 @@
           document.getElementById("us_nick").innerHTML = d[8];
           document.getElementById("us_password").innerHTML = d[9];
           document.getElementById("us_status").innerHTML = status;
-
-            
+   
       }) 
-  
     });
-      
-          
-
-}
+  }
 
     </script>
   <div class="modal-dialog" role="document">
@@ -122,3 +117,30 @@
     </div>
   </div>
 </div>
+
+
+
+    <!--Eliminar usuario-->
+                                      
+                                  
+    <div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="modalDelete"
+                                        aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                          <div class="modal-content">
+                                            <div class="modal-header text-center">
+                                              <h4 class="modal-title w-100 font-weight-bold ml-5 text-danger">Eliminar</h4>
+                                              <button type="button" class="close text-danger" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                              </button>
+                                            </div>
+                                            <div class="modal-body mx-3">
+                                              <p class="text-center h4">¿Está seguro de que desea eliminar el registro del usuario xxxxx?</p>
+                                  
+                                            </div>
+                                            <div class="modal-footer d-flex justify-content-center deleteButtonsWrapper">
+                                              <button type="button" class="btn btn-danger btnYesClass" id="btnYes" data-dismiss="modal">Sí</button>
+                                              <button type="button" class="btn btn-primary btnNoClass" id="btnNo" data-dismiss="modal">No</button>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
