@@ -12,6 +12,11 @@ if(!isset($_REQUEST['x']))
 
 $sql3="SELECT bran_id, bran_name FROM branch b INNER JOIN  company c ON b.comp_nit=c.comp_nit
 WHERE b.comp_nit='$_SESSION[companyNit]'";
+//búsqueda roles
+
+$sql4="SELECT rol_id, rol_name FROM role";
+
+
 
 //búsqueda supervisores
  $sql= "SELECT u.us_id, us_name, us_lastname, us_document,us_email, us_contactNumber, us_nickname, us_password, rol_name, us_status, bran_name,MAX(login_date) AS 
@@ -33,20 +38,31 @@ LEFT JOIN company c ON c.comp_nit= u.comp_nit
     GROUP BY u.us_id";
 
 
- 
+  $result4=$objConnection->query($sql4);
   $result3=$objConnection->query($sql3);
   $result1=$objConnection->query($sql);
   $result2=$objConnection->query($sql2);
 
   
-  $arrayBranch=0;
+$arrayBranch=[];
 
 while ($branch = mysqli_fetch_assoc($result3)) {
   $arrayBranch []= $branch; 
 }
 
-/*Aquí puedes ver tu resultado*/
-//print_r ($arrayBranch); //La salida aquí es sólo para depurar.
+$arrayRole=[];
+
+while ($role = mysqli_fetch_assoc($result4)) {
+  $arrayRole []= $role; 
+}
+
+
+ 
+  
+  
+
+
+
 
 ?>
 
