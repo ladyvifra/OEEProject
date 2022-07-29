@@ -8,7 +8,7 @@
     <title>Inicio</title>
     
     
-    <link rel="stylesheet"href=style.css>
+    <link rel="stylesheet"href=css/style.css>
 </head>
 <body>
 <div id="app" class="app">

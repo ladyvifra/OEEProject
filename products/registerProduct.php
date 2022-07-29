@@ -3,13 +3,18 @@
 session_start();
 
 extract($_REQUEST);
+require "../connectiondb.php";
 
-if(!isset($_SESSION['user']))
-    header("location:login/login.php?x=2");
+$objectConnection = Connect();
+
+
+
+echo $_SESSION['companyNit'];
+
+        
 
 
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -17,28 +22,22 @@ if(!isset($_SESSION['user']))
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
     <title>Inicio</title>
-    <link rel="stylesheet"href=css/style.css>
+    <link rel="stylesheet"href=../css/style.css>
+    <link rel="stylesheet"href=../css/registerProduct.css>
 </head>
 <body>
     <header>
         <h1 id="pageName">SMART OEE</h1>
         <nav>
-            <a href="mainMenu.php">Inicio</a>
+            <a href="../mainMenu.php">Inicio</a>
             <a href="#">Ayuda</a>
-            <a href="login/logout.php">Salir</a>
+            <a href="../login/logout.php">Salir</a>
             
         </nav>
 
     </header>
-
-    <?php
-       $x=isset($_REQUEST['user']);
-      if($x){  
-        echo "<script>alert('El usuario se ha registrado correctamente')</script>";
-          }
-
-    ?>
 
     <div class="main-component">
         <div class="row m2">
@@ -48,16 +47,16 @@ if(!isset($_SESSION['user']))
                         <ul>
                             <li><a href="#">Usuarios</a>
                                 <ul>
-                                    <li><a href="users/userSignup.php">Registrar usuario</a></li>
-                                    <li><a href="users/viewUsers.php">Ver usuarios</a></li>
+                                    <li><a href="../users/userSignup.php">Registrar usuario</a></li>
+                                    <li><a href="../users/viewUsers.php">Ver usuarios</a></li>
                                 </ul>
                             </li>
                             <li><a href="#">Parametrización del sistema</a>
                                 <ul>
                                     <li><a href="#">Productos</a></li>
                                         <ul>
-                                        <li><a href="products/registerProduct.php">Registrar producto</a></li>
-                                        <li><a href="products/viewProducts.php">Ver productos registrados</a></li>
+                                            <li><a href="registerProduct.php">Registrar producto</a></li>
+                                            <li><a href="viewProducts.php">Ver productos registrados</a></li>
                                         
                                         </ul>
                                     <li><a href="#">Paradas</a></li>
@@ -91,18 +90,49 @@ if(!isset($_SESSION['user']))
 
             </div>
             <section class="column m2-2">
-            <h1><?php echo $_SESSION['company'];?></h1>
-                <div class="row-2">
-                    <div class="col">
-                        <img class="imagen im-m2"  src="assets/john-schnobrich-FlPc9_VocJ4-unsplash.jpg" />
+                <h2 class="companyName" id="company"> <?php echo $_SESSION['company'];?></h2>
 
+                <?php
+       $x=isset($_REQUEST['user']);
+      if($x=='fail'){  
+        echo "<h3 style='color:red'>No se ha podido registar el producto, verifique los campos </h3>";
+          }
+
+                ?>
+                <div class="container">
+                    
+               
+                    <div class="row header">
+                        <h1>Registrar producto &nbsp;</h1>
+                        <h3>Estimado usuario, por favor registre la siguiente información del producto</h3>
                     </div>
-                    <div class="col bienvenida">
-                        <h3> Estimado usuario, bienvenido a nuestro sistema de información Smart OEE</h3>
-
+                    <div class="row body">
+                        <form role="form" name="formProduct" method="post" action = "validateProductForm.php">
+                        <ul>
+                            
+                            <li>
+                            <p class="left">
+                                <label for="first_name">Nombre del producto</label>
+                                <input type="text" name="product_name"  />
+                            </p>
+                            
+                            </li>
+                                    
+                            <li><div class="divider"></div></li>
+                            <li>
+                            <label for="comments">Descripción</label>
+                            <textarea cols="46" rows="3" name="description"></textarea>
+                            </li>
+                            
+                            <li>
+                            <input class="btn btn-submit" type="submit" value="Submit" />
+                            <small>or press <strong>enter</strong></small>
+                            </li>
+                            
+                        </ul>
+                        </form>  
                     </div>
-
-                </div>
+                    </div>
 
             </section>
 
@@ -125,6 +155,6 @@ if(!isset($_SESSION['user']))
         <!-- Copyright -->
       </footer>
 
-      
+      <script src="js/menu1.js"></script>
 </body>
 </html>

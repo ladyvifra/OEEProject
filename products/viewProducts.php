@@ -109,10 +109,11 @@ while ($role = mysqli_fetch_assoc($result4)) {
                             <li><a href="#">Parametrización del sistema</a>
                                 <ul>
                                     <li><a href="#">Productos</a></li>
-                                      <ul>
+                                    ul>
                                         <li><a href="../products/registerProduct.php">Registrar producto</a></li>
                                         <li><a href="../products/viewProducts.php">Ver productos registrados</a></li>
-                                      </ul>
+                                        
+                                        </ul>
                                     <li><a href="#">Paradas</a></li>
                                     <li><a href="#">Máquinas</a></li>
                                     <li><a href="#">Fallas</a></li>

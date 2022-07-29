@@ -1,6 +1,6 @@
 <!--Modal ver usuario-->
 
-<link rel="stylesheet" type="text/css" href="../modals.css">  
+<link rel="stylesheet" type="text/css" href="../css/modals.css">  
 
 <div class="modal fade addNewInputs" id="modalAdd" tabindex="-1" role="dialog" aria-labelledby="modalAdd"
   aria-hidden="true">

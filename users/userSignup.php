@@ -27,7 +27,7 @@ echo $_SESSION['companyNit'];
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio</title>
-    <link rel="stylesheet"href=../style.css>
+    <link rel="stylesheet"href=../css/style.css>
 </head>
 <body>
     <header>
@@ -56,6 +56,11 @@ echo $_SESSION['companyNit'];
                             <li><a href="#">Parametrización del sistema</a>
                                 <ul>
                                     <li><a href="#">Productos</a></li>
+                                        <ul>
+                                            <li><a href="../products/registerProduct.php">Registrar producto</a></li>
+                                            <li><a href="../products/viewProducts.php">Ver productos registrados</a></li>
+                                        
+                                        </ul>
                                     <li><a href="#">Paradas</a></li>
                                     <li><a href="#">Máquinas</a></li>
                                     <li><a href="#">Fallas</a></li>
