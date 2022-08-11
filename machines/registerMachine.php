@@ -61,14 +61,14 @@ echo $_SESSION['companyNit'];
                                         </ul>
                                     <li><a href="#">Paradas</a></li>
                                         <ul>
-                                            <li><a href="../stops/registerStopProduction.php">Registrar tipo de parada</a></li>
-                                            <li><a href="../stops/viewStops.php">Ver tipos de parada</a></li>
+                                            <li><a href="registerStopProduction.php">Registrar tipo de paradas</a></li>
+                                            <li><a href="viewPStopsProduction.php">Ver tipos de parada</a></li>
                                         
                                         </ul>
                                     <li><a href="#">Máquinas</a></li>
                                         <ul>
-                                            <li><a href="../machines/registerMachine.php">Registrar tipo de máquinas</a></li>
-                                            <li><a href="../machines/viewMachines.php">Ver tipos de máquinas</a></li>
+                                            <li><a href="registerMachine.php">Registrar tipo de máquina</a></li>
+                                            <li><a href="viewMachines.php">Ver tipos de máquina</a></li>
                                         
                                         </ul>
                                     <li><a href="#">Fallas</a></li>
@@ -118,26 +118,22 @@ echo $_SESSION['companyNit'];
                     
                
                     <div class="row header">
-                        <h1>Registrar producto &nbsp;</h1>
-                        <h3>Estimado usuario, por favor registre la siguiente información del producto</h3>
+                        <h1>Registrar máquinas  &nbsp;</h1>
+                        <h3>Estimado usuario, por favor registre el nombre de la máquina:</h3>
                     </div>
                     <div class="row body">
-                        <form role="form" name="formProduct" method="post" action = "validateProductForm.php">
+                        <form role="form" name="formMachine" method="post" action = "validateMachineForm.php">
                         <ul>
                             
                             <li>
                             <p class="left">
-                                <label for="first_name">Nombre del producto</label>
-                                <input type="text" name="product_name"  />
+                                <label for="first_name">Nombre de la máquina</label>
+                                <input type="text" name="machine_name"  />
                             </p>
                             
                             </li>
                                     
-                            <li><div class="divider"></div></li>
-                            <li>
-                            <label for="comments">Descripción</label>
-                            <textarea cols="46" rows="3" name="description"></textarea>
-                            </li>
+        
                             
                             <li>
                             <input class="btn btn-submit" type="submit" value="Submit" />
@@ -147,7 +143,7 @@ echo $_SESSION['companyNit'];
                         </ul>
                         </form>  
                     </div>
-                    </div>
+                </div>
 
             </section>
 

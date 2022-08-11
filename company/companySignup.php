@@ -13,6 +13,7 @@
     
     
     <link rel="stylesheet"href=../css/style.css>
+    <link rel="stylesheet"href=../css/registerProduct.css>
 </head>
 <body>
 <div id="app" class="app">
@@ -20,20 +21,20 @@
         <h1 id="pageName">SMART OEE</h1>
     </header>
     <section>
-        <div class="main-component mt-5">
 
-            <div id="IngresarPaciente">
-                <div class="container">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="column m2-2">
-                                <h2 class="text-center">
-                                    Registra tu empresa
-                                </h2>
-                                <div class="row">
-                                    <form role="form" id="form_create_company" name="form_create_company" method ="post" action="validateCompanyRegister.php">
-                                        <div class="row">
-                                            <div class="col-md-5">
+        
+    <div class="container">
+                    
+               
+                    <div class="row header">
+                        <h1>Registra tu empresa  &nbsp;</h1>
+                        <h3>Estimado usuario, por favor registre su empresa:</h3>
+                    </div>
+
+                    <div class="row body">
+                        <form role="form" id="form_create_company" name="form_create_company" method ="post" action="validateCompanyRegister.php">
+                       <div class="row">
+                                           
                                                 <div class="card m-2">
                                                     <h3 class="card-header">
                                                         Datos personales
@@ -105,14 +106,10 @@
 
                                                 </div>
                                         </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                        
+                                    </form>  
                     </div>
                 </div>
-            </div>
+           
 
         
 

@@ -28,6 +28,7 @@ echo $_SESSION['companyNit'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio</title>
     <link rel="stylesheet"href=../css/style.css>
+    <link rel="stylesheet"href=../css/registerProduct.css>
 </head>
 <body>
     <header>
@@ -62,8 +63,23 @@ echo $_SESSION['companyNit'];
                                         
                                         </ul>
                                     <li><a href="#">Paradas</a></li>
+                                        <ul>
+                                            <li><a href="../stops/registerStopProduction.php">Registrar tipo de paradas</a></li>
+                                            <li><a href="../stops/viewPStopsProduction.php">Ver tipos de parada</a></li>
+                                        
+                                        </ul>
                                     <li><a href="#">Máquinas</a></li>
+                                        <ul>
+                                            <li><a href="../machines/registerMachine.php">Registrar tipo de máquinas</a></li>
+                                            <li><a href="../machines/viewMachines.php">Ver tipos de máquinas</a></li>
+                                        
+                                        </ul>
                                     <li><a href="#">Fallas</a></li>
+                                        <ul>
+                                            <li><a href="../faults/registerFault.php">Registrar tipo de falla</a></li>
+                                            <li><a href="../faults/viewFaults.php">Ver tipos de fallas</a></li>
+                                        
+                                        </ul>
                                     <li><a href="#">Horarios</a></li>
                                     <li><a href="#">Sucursales</a></li>
                                 </ul>
@@ -101,8 +117,11 @@ echo $_SESSION['companyNit'];
           }
 
     ?>
-                <h3 class="companyName"> Registrar nuevo usuario </h3>
-                <div class="row-2">
+                <   <div class="row header">
+                        <h1class="companyName"> Registrar nuevo usuario  &nbsp;</h1>
+                        <h3>Estimado usuario, por favor registre la siguiente información del nuevo usuario:</h3>
+                    </div>
+                    <div class="row body">
                     <form role="form" name="formUser" method="post" action = "validateUserForm.php">
                     <div class="row">
                             <div class="col-md-5">
@@ -149,14 +168,7 @@ echo $_SESSION['companyNit'];
                                                         <label class="form-check-label" for="flexRadioDefault2">
                                                         Operario
 
-                                                    <div class="form-check">
-                                                    <input value= 3 class="form-check-input" type="radio" name="role" id="role" checked>
-                                                    <label class="form-check-label" for="flexRadioDefault2">
-                                                        Administrador
-                                                        
-                                                        </label>
-                                                        
-                                                    </div>
+                                                    
                                                 </div>
 
                                           
@@ -208,12 +220,10 @@ echo $_SESSION['companyNit'];
 
                                                 <!-- Password input -->
                                                 <div class="form-outline mb-4">
-                                                    <form action="" name="f1">
-                                                        Contraseña: <input name = "password" type="password" name="clave1" size="20">
+                                                <label class="form-label" for="form3Example3">Contraseña</label> 
+                                                    <input name = "password" type="password" name="clave1" size="20">
                                                         <br>
-                                                        Repite contraseña: <input type="password" name="clave2" size="20">
-                                                        <br>
-                                                        <input type="button" value="Comprobar si son iguales" onClick="comprobarClave()">
+                                                
                                                         
                                                     </form>
                                                 </div>

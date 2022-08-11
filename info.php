@@ -9,6 +9,7 @@
     
     
     <link rel="stylesheet"href=css/style.css>
+    <link rel="stylesheet"href=css/registerProduct.css>
 </head>
 <body>
 <div id="app" class="app">

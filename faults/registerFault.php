@@ -55,14 +55,14 @@ echo $_SESSION['companyNit'];
                                 <ul>
                                     <li><a href="#">Productos</a></li>
                                         <ul>
-                                            <li><a href="registerProduct.php">Registrar producto</a></li>
-                                            <li><a href="viewProducts.php">Ver productos registrados</a></li>
+                                            <li><a href="../products/registerProduct.php">Registrar producto</a></li>
+                                            <li><a href="../products/viewProducts.php">Ver productos registrados</a></li>
                                         
                                         </ul>
                                     <li><a href="#">Paradas</a></li>
                                         <ul>
-                                            <li><a href="../stops/registerStopProduction.php">Registrar tipo de parada</a></li>
-                                            <li><a href="../stops/viewStops.php">Ver tipos de parada</a></li>
+                                            <li><a href="registerStopProduction.php">Registrar tipo de paradas</a></li>
+                                            <li><a href="viewPStopsProduction.php">Ver tipos de parada</a></li>
                                         
                                         </ul>
                                     <li><a href="#">Máquinas</a></li>
@@ -118,17 +118,17 @@ echo $_SESSION['companyNit'];
                     
                
                     <div class="row header">
-                        <h1>Registrar producto &nbsp;</h1>
-                        <h3>Estimado usuario, por favor registre la siguiente información del producto</h3>
+                        <h1>Registrar tipo de parada  &nbsp;</h1>
+                        <h3>Estimado usuario, registre por favor el tipo de falla de calidad que pueden presentar sus productos:</h3>
                     </div>
                     <div class="row body">
-                        <form role="form" name="formProduct" method="post" action = "validateProductForm.php">
+                        <form role="form" name="formFaults" method="post" action = "validateFaultForm.php">
                         <ul>
                             
                             <li>
                             <p class="left">
-                                <label for="first_name">Nombre del producto</label>
-                                <input type="text" name="product_name"  />
+                                <label for="first_name">Tipo de falla</label>
+                                <input type="text" name="fault_name"  />
                             </p>
                             
                             </li>

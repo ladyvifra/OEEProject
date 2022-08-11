@@ -19,6 +19,8 @@ if(!isset($_SESSION['user']))
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio</title>
     <link rel="stylesheet"href=css/style.css>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="mainMenu.js"></script>
 </head>
 <body>
     <header>
@@ -29,6 +31,9 @@ if(!isset($_SESSION['user']))
             <a href="login/logout.php">Salir</a>
             
         </nav>
+
+
+        
 
     </header>
 
@@ -45,7 +50,7 @@ if(!isset($_SESSION['user']))
             <div class="column m2-1">
                 <div class="menu-container">
                     <nav class="menu-2">
-                        <ul>
+                        <ul class="nav">
                             <li><a href="#">Usuarios</a>
                                 <ul>
                                     <li><a href="users/userSignup.php">Registrar usuario</a></li>
@@ -61,8 +66,23 @@ if(!isset($_SESSION['user']))
                                         
                                         </ul>
                                     <li><a href="#">Paradas</a></li>
+                                        <ul>
+                                            <li><a href="stops/registerStopProduction.php">Registrar tipo de paradas</a></li>
+                                            <li><a href="stops/viewStopsProduction.php">Ver tipos de parada</a></li>
+                                        
+                                        </ul>
                                     <li><a href="#">Máquinas</a></li>
+                                        <ul>
+                                            <li><a href="machines/registerMachine.php">Registrar tipo de máquina</a></li>
+                                            <li><a href="machines/viewMachines.php">Ver tipos de máquina</a></li>
+                                        
+                                        </ul>
                                     <li><a href="#">Fallas</a></li>
+                                        <ul>
+                                            <li><a href="faults/registerFault.php">Registrar tipo de falla</a></li>
+                                            <li><a href="faults/viewFaults.php">Ver tipos de fallas</a></li>
+                                        
+                                        </ul>
                                     <li><a href="#">Horarios</a></li>
                                     <li><a href="#">Sucursales</a></li>
                                 </ul>

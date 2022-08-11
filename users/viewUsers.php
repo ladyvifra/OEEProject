@@ -114,8 +114,23 @@ while ($role = mysqli_fetch_assoc($result4)) {
                                         <li><a href="../products/viewProducts.php">Ver productos registrados</a></li>
                                       </ul>
                                     <li><a href="#">Paradas</a></li>
+                                       <ul>
+                                            <li><a href="../stops/registerStopProduction.php">Registrar tipo de paradas</a></li>
+                                            <li><a href="..stops/viewPStopsProduction.php">Ver tipos de parada</a></li>
+                                        
+                                      </ul>
                                     <li><a href="#">Máquinas</a></li>
+                                        <ul>
+                                            <li><a href="../machines/registerMachine.php">Registrar tipo de máquinas</a></li>
+                                            <li><a href="../machines/viewMachines.php">Ver tipos de máquinas</a></li>
+                                        
+                                        </ul>
                                     <li><a href="#">Fallas</a></li>
+                                        <ul>
+                                            <li><a href="../faults/registerFault.php">Registrar tipo de falla</a></li>
+                                            <li><a href="../faults/viewFaults.php">Ver tipos de fallas</a></li>
+                                        
+                                        </ul>
                                     <li><a href="#">Horarios</a></li>
                                     <li><a href="#">Sucursales</a></li>
                                 </ul>

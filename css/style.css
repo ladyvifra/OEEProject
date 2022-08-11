@@ -7,7 +7,7 @@ body
 
 /*header*/
 header{
-    background-color: #568ca1;
+    background-color: #4f6fad;
     text-align:center;
     padding: 25px;
 }
@@ -16,7 +16,7 @@ header h1{
 }
 
 h2{
-  color:   rgb(10, 29, 197);
+  color:   rgb(35, 6, 53);
   font-weight: bold;
   
 }
@@ -102,12 +102,12 @@ button {
     margin-bottom:30px;
     font-size:20px;
     border-radius: 1px solid;
-    color: blue;
+    color: rgb(49, 4, 70);
 }
 
 .controls{
     width: 100%;
-    border: 1px solid #017bad;
+    border: 1px solid #4f6fad;
     margin-bottom: 15px;
     padding: 11px 10px;
     background: white;
@@ -120,7 +120,7 @@ button {
 
     width: 100%;
     height: 40px;
-    background: #017bad;
+    background: #4f6fad;
     border:none;
     color:white;
     margin-bottom: 16px;
@@ -171,7 +171,7 @@ button {
     text-align: center;
     margin-top: 100px;
     padding: 50px;
-    color: rgb(10, 29, 197);
+    color: rgb(58, 10, 80);
     margin-bottom: 50px;
 
 
@@ -194,7 +194,7 @@ button {
 
 .btn-secundary{
  
-        background-color: #017bad;
+        background-color: #4f6fad;
         display: inline-block;
         text-decoration: none;
         padding: auto;
@@ -224,7 +224,7 @@ footer {
     left: 0px;
     right: 0px;
     margin-bottom: 0px;
-    background-color:#568ca1;
+    background-color:#4f6fad;
   }
   
   #text-footer {
@@ -247,7 +247,7 @@ footer {
   /*signup company*/
 
 .text-center h2{
-  color:  rgb(10, 29, 197);
+  color:  rgb(112, 57, 184);
 }
 .btn-group{
   margin-bottom: 30px;
@@ -331,7 +331,7 @@ footer {
 
                 .bienvenida h3{
                     margin: 150px 10px 70px 10px;
-                    color:rgb(10, 29, 197);
+                    color:rgb(61, 10, 90);
                 }
 
                 .im-m2{
@@ -341,6 +341,9 @@ footer {
 
                 /*menu desplegable*/
 
+                nav > li {
+                  float:left;
+                  }
                 li{
                     list-style-type:none;
                     position:relative;
@@ -356,7 +359,7 @@ footer {
                     height:38px;
                     border:1px solid #000;
                     color:#fff;
-                    background-color:#017bad;
+                    background-color:#4f6fad;
                     }
                             
                     li a:hover{
@@ -413,8 +416,8 @@ footer {
   .tabs {
     position: sticky;
     margin: 3rem 0;
-    background: #568ca1;
-    height: 90%;
+    background: #4f6fad;
+    height:90%;
     
   }
   .tabs::before,
@@ -437,7 +440,7 @@ footer {
     line-height: 2.75em;
     height: auto;
     padding: 0 1.618em;
-    background: #017bad;
+    background: #4f6fad;
     border-right: 0.125rem solid rgb(134, 216, 241);
     color: #fff;
     cursor: pointer;
