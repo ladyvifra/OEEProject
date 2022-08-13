@@ -16,7 +16,7 @@ $idBranch='NULL';
 
 
 
-$sql ="INSERT INTO user (us_name, us_lastName, us_document, us_email, us_contactNumber, us_nickname, us_password,
+echo $sql ="INSERT INTO user (us_name, us_lastName, us_document, us_email, us_contactNumber, us_nickname, us_password,
 comp_nit, us_role, bran_id)
 VALUES('$_REQUEST[name]','$_REQUEST[lastName]','$_REQUEST[identification]','$_REQUEST[email]',
 '$_REQUEST[telephone]','$_REQUEST[username]','$_REQUEST[password]','$_SESSION[companyNit]',
@@ -25,11 +25,11 @@ VALUES('$_REQUEST[name]','$_REQUEST[lastName]','$_REQUEST[identification]','$_RE
 $result = $objConnection->query($sql);
 
 if($result){
-   // echo "<script>alert('El usuario se ha registrado correctamente')</script>";
+   echo "<script>alert('El usuario se ha registrado correctamente')</script>";
     header('location:../mainMenu.php?user=true');
 }else
 {
-    //echo "<script>alert('Se ha presentado un problema al registrar usuario') </sript>";
+    echo "<script>alert('Se ha presentado un problema al registrar usuario') </sript>";
     header('locaction:userSignup.php?user=fail');
 }
 

@@ -3,7 +3,7 @@
 <div class="modal fade modalEditClass" id="modalEdit" tabindex="-1" role="dialog" aria-hidden="true">
 <script>
 
-const branch = <?php echo json_encode($arrayBranch); ?>
+var branch = <?php echo json_encode($arrayBranch); ?>
         // Justo aquí estamos pasando la variable ----^
         
         console.log("Las sucursales son: ", branch);
@@ -27,7 +27,7 @@ window.addEventListener("load", function(event) {
           
           console.log(userEdit)
           e=userEdit.split('//');
-          console.log(e);
+          console.log("papi",e);
           ;
           $("#idUser").val(e[0]);
           $("#formIdEdit").val(e[3]);
@@ -39,31 +39,33 @@ window.addEventListener("load", function(event) {
           $("#formPasswordEdit").val(e[9]);
           //$("#flexRadioDefault").val(e[4]);
           
-          document.querySelector('#idUser').value=idUser;
+          document.querySelector('#idUser').value=e[0];
 
           console.log(e[4]);
-          var roleUser = e[4];
+          var roleUser = e[11];
           console.log(roleUser);
           console.log(typeof roleUser);
 
         //función para seleccionar role por defecto
         function setRadio(name, value) {
             document.querySelectorAll(`input[name="${name}"]`).forEach(element => {
-                if(element.value === value) {
+                if(element.value === value ){
                     element.checked = true;
                 }
             });
         }
 
         cargar_sucursales();
+        debugger
         cargarRol();
         setRadio('flexRadioDefault', roleUser)
+        document.getElementById("branch").value = e[12];
       }) 
      
     });
 
    
-  //  document.ready = document.getElementById("branch").value = e[5];
+  //  document.ready = 
     //
 });
 
@@ -97,7 +99,11 @@ function cargar_sucursales() {
 
 //  agregar opciones a un <select> sucursales
 function addOptions(domElement, json) {
- var select = document.getElementsByName(domElement)[0];
+    
+//removeElement(domElement)
+$('#'+domElement).empty();
+
+ var select = document.getElementById(domElement);
  
  Object.values(json).forEach(function(elm) {
   var option = document.createElement("option");
@@ -105,6 +111,11 @@ function addOptions(domElement, json) {
   option.value= elm.bran_id;
   select.add(option);
  })
+
+ function removeElement(id) {
+    var elem = document.getElementById(id);
+    return elem.parentNode.removeChild(elem);
+}
 }
 
  

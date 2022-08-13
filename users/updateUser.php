@@ -12,7 +12,7 @@ if($_REQUEST['branch']){
 }else{
     $idBranch='NULL';
 }
-echo $idBranch;
+
 //Agregamos la sentencia sql que permite ingresar un registro a la tabla empleados
  echo $sql ="UPDATE user SET us_document = '$_REQUEST[formIdEdit]', us_name='$_REQUEST[formNameEdit]', 
  us_lastName= '$_REQUEST[formLastNameEdit]', us_email='$_REQUEST[formEmailEdit]', us_contactNumber='$_REQUEST[formTelephoneEdit]', 
@@ -23,12 +23,13 @@ echo $idBranch;
 
 $result = $objConnection->query($sql);
 if($result){
-    echo "<script> alert('El usuario se ha registrado correctamente')</script>";
+    echo "<script> alert('El usuario se ha actualizado correctamente')</script>";
+    header('location:../users/viewUsers.php?user=true');
      
  }else
  {
-     echo "<script>alert('Se ha presentado un problema al registrar usuario') </script>";
-  
+     echo "<script>alert('Se ha presentado un problema al actualizar el usuario') </script>";
+     header('location:../mainMenu.php?user=false');
  }
 	
 
