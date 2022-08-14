@@ -8,10 +8,6 @@ require "../connectiondb.php";
 $objectConnection = Connect();
 
 
-
-        
-
-
 ?>
 
 <!DOCTYPE html>
@@ -25,7 +21,7 @@ $objectConnection = Connect();
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Register Machine</title>
+    <title>Register Shift </title>
 
     <!-- Custom fonts for this template-->
     <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -69,8 +65,8 @@ $objectConnection = Connect();
                 <div id="collapseUsers" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         
-                        <a class="collapse-item" href="../user/viewUsers.php">Ver usuarios</a>
-                        <a class="collapse-item" href="../userSignup.php">Registrar usuario</a>
+                        <a class="collapse-item" href="../users/viewUsers.php">Ver usuarios</a>
+                        <a class="collapse-item" href="../users/userSignup.php">Registrar usuario</a>
                     </div>
                 </div>
             </li>
@@ -109,8 +105,8 @@ $objectConnection = Connect();
                 <div id="collapseStops" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         
-                        <a class="collapse-item" href="../products/viewProducts.php">Ver paradas</a>
-                        <a class="collapse-item" href="../products/StopProduction.php">Registrar parada</a>
+                        <a class="collapse-item" href="../stops/viewProducts.php">Ver paradas</a>
+                        <a class="collapse-item" href="../stops/registerStopProduction.php">Registrar parada</a>
                     </div>
                 </div>
             </li>
@@ -125,8 +121,8 @@ $objectConnection = Connect();
                 <div id="collapseMachines" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="viewMachines.php">Ver máquinas</a>
-                        <a class="collapse-item" href="registerMachine.php">Registrar máquina</a>
+                        <a class="collapse-item" href="../machines/viewMachines.php">Ver máquinas</a>
+                        <a class="collapse-item" href="../machines/registerMachine.php">Registrar máquina</a>
                     </div>
                 </div>
             </li>
@@ -154,8 +150,8 @@ $objectConnection = Connect();
                 <div id="collapseShifts" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="../shift/viewShifts.php">Ver horarios</a>
-                        <a class="collapse-item" href="../shift/registerShifts.php">Registrar horario</a>
+                        <a class="collapse-item" href="viewShifts.php">Ver horarios</a>
+                        <a class="collapse-item" href=".registerShifts.php">Registrar horario</a>
                     </div>
                 </div>
             </li>
@@ -169,7 +165,7 @@ $objectConnection = Connect();
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="../branches/viewBranches.php">Ver sucursales</a>
-                        <a class="collapse-item" href="../branches/registerBranches.php">Registrar sucursales</a>
+                        <a class="collapse-item" href="../branches/registerBranch.php">Registrar sucursales</a>
                     </div>
                 </div>
             </li>
@@ -235,11 +231,11 @@ $objectConnection = Connect();
             <!-- Main Content -->
             <?php
        $x=isset($_REQUEST['user']);
-      if($x=='fail'){  
-        echo "<h3 style='color:red'>No se ha podido registar el producto, verifique los campos </h3>";
+      if($x){  
+        echo "<script>alert('El horario se ha registrado correctamente')</script>";
           }
 
-                ?>
+    ?>
             <div id="content">
 
                 <!-- Topbar -->
@@ -428,30 +424,45 @@ $objectConnection = Connect();
             <?php
        $x=isset($_REQUEST['user']);
       if($x=='fail'){  
-        echo "<h3 style='color:red'>No se ha podido registar el usuario, verifique los campos </h3>";
+        echo "<h3 style='color:red'>No se ha podido registar el horario correctamente, verifique los campos </h3>";
           }
 
     ?>
-               <div class="container">
+                <div class="container">
                     
                
                     <div class="row header">
-                        <h1>Registrar máquinas  &nbsp;</h1>
-                        <h3>Estimado usuario, por favor registre el nombre de la máquina:</h3>
+                        <h1>Registrar horario  &nbsp;</h1>
+                        <h3>Estimado usuario, por favor registre el horario:</h3>
                     </div>
                     <div class="row body">
-                        <form role="form" name="formMachine" method="post" action = "validateMachineForm.php">
+                        <form role="form" name="formFaults" method="post" action = "validateShiftForm.php">
                         <ul>
                             
                             <li>
                             <p class="left">
-                                <label for="first_name">Nombre de la máquina</label>
-                                <input type="text" name="machine_name"  />
+                                <label for="first_name">Asigne un nombre al horario </label>
+                                <input type="text" name="shift_name"  />
+                            </p>
+                            
+                            </li>
+
+                            <li>
+                            <p class="col-6">
+                                <label for="first_name">Hora de inicio </label>
+                                <input type="time" name="start_time"  />
+                            </p>
+                            
+                            </li>
+                            <li>
+                            <p class="col-6">
+                                <label for="first_name">Hora de finalización</label>
+                                <input type="time" name="finish_time"  />
                             </p>
                             
                             </li>
                                     
-        
+                            
                             
                             <li>
                             <input class="btn btn-submit" type="submit" value="Submit" />
@@ -461,7 +472,9 @@ $objectConnection = Connect();
                         </ul>
                         </form>  
                     </div>
-                </div>
+                    </div>
+
+
             </section>
 
                 </div>

@@ -9,6 +9,7 @@ $objectConnection = Connect();
 
 
 
+
         
 
 
@@ -25,7 +26,7 @@ $objectConnection = Connect();
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Register Machine</title>
+    <title>Register Branch</title>
 
     <!-- Custom fonts for this template-->
     <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -109,8 +110,8 @@ $objectConnection = Connect();
                 <div id="collapseStops" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         
-                        <a class="collapse-item" href="../products/viewProducts.php">Ver paradas</a>
-                        <a class="collapse-item" href="../products/StopProduction.php">Registrar parada</a>
+                        <a class="collapse-item" href="../stops/viewProducts.php">Ver paradas</a>
+                        <a class="collapse-item" href="../stops/registerStopProduction.php">Registrar parada</a>
                     </div>
                 </div>
             </li>
@@ -125,8 +126,8 @@ $objectConnection = Connect();
                 <div id="collapseMachines" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="viewMachines.php">Ver máquinas</a>
-                        <a class="collapse-item" href="registerMachine.php">Registrar máquina</a>
+                        <a class="collapse-item" href="../machines/viewMachines.php">Ver máquinas</a>
+                        <a class="collapse-item" href="../machines/registerMachine.php">Registrar máquina</a>
                     </div>
                 </div>
             </li>
@@ -139,8 +140,8 @@ $objectConnection = Connect();
                 <div id="collapseFaults" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="../faults/viewFaults.php">Ver fallas</a>
-                        <a class="collapse-item" href="../faults/registerFault.php">Registrar falla</a>
+                        <a class="collapse-item" href="viewFaults.php">Ver fallas</a>
+                        <a class="collapse-item" href="registerFault.php">Registrar falla</a>
                     </div>
                 </div>
             </li>
@@ -168,8 +169,8 @@ $objectConnection = Connect();
                 <div id="collapseBranches" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="../branches/viewBranches.php">Ver sucursales</a>
-                        <a class="collapse-item" href="../branches/registerBranches.php">Registrar sucursales</a>
+                        <a class="collapse-item" href="viewBranches.php">Ver sucursales</a>
+                        <a class="collapse-item" href="registerBranches.php">Registrar sucursales</a>
                     </div>
                 </div>
             </li>
@@ -436,22 +437,38 @@ $objectConnection = Connect();
                     
                
                     <div class="row header">
-                        <h1>Registrar máquinas  &nbsp;</h1>
-                        <h3>Estimado usuario, por favor registre el nombre de la máquina:</h3>
+                        <h1>Registrar sucursal  &nbsp;</h1>
+                        <h3>Estimado usuario, registre por favor los datos de la sucursal</h3>
                     </div>
                     <div class="row body">
-                        <form role="form" name="formMachine" method="post" action = "validateMachineForm.php">
+                        <form role="form" name="formFaults" method="post" action = "validateBranchForm.php">
                         <ul>
-                            
+                        <div class="row">
                             <li>
-                            <p class="left">
-                                <label for="first_name">Nombre de la máquina</label>
-                                <input type="text" name="machine_name"  />
+                            <p class="col-6">
+                                <label for="first_name">* Nombre de la sucursal</label>
+                                <input type="text" name="branch_name"  />
                             </p>
                             
                             </li>
-                                    
-        
+                          </div> 
+
+                            <div class="form-group row">
+                                <div class="col-6">
+                                    <label for="branAddress">
+                                        Dirección
+                                    </label>
+                                        <input name ="branch_address" type="text"class="form-control" id="bran_address" />
+                                        <br>
+                                </div>
+                                <div class="col-6">
+                                    <label for="branTelephone">
+                                        Teléfono
+                                    </label>
+                                        <input  name = "branch_telephone" type="text" class="form-control" id="bran_telephone"/> 
+                                </div>
+                            </div>
+                            
                             
                             <li>
                             <input class="btn btn-submit" type="submit" value="Submit" />
@@ -461,7 +478,8 @@ $objectConnection = Connect();
                         </ul>
                         </form>  
                     </div>
-                </div>
+                    </div>
+
             </section>
 
                 </div>
