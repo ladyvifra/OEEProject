@@ -35,7 +35,7 @@ function generatePassword()
 
 function generateUser($companyName){
 
-    $user = "admin".substr($companyName,0,3);
+    $user = "admin".substr($companyName,0,5);
     return $user;
 }
 
@@ -48,9 +48,9 @@ $userAdmin=generateUser($companyName);
 
 //insert de usuario administrador
 
-$sql2="INSERT INTO User (us_email, us_contactNumber, us_nickname, us_password, comp_nit, us_role)
+$sql2="INSERT INTO User (us_name, us_email, us_contactNumber, us_nickname, us_password, comp_nit, us_role)
 VALUES
-('$_REQUEST[companyEmail]', '$_REQUEST[companyTelephone]','$userAdmin',
+('Administrador','$_REQUEST[companyEmail]', '$_REQUEST[companyTelephone]','$userAdmin',
 '$passwordAdmin','$_REQUEST[identification]',  '3')";
 $result2= $objConnection->query($sql2);
 

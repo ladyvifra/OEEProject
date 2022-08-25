@@ -169,7 +169,7 @@ $objectConnection = Connect();
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="../branches/viewBranches.php">Ver sucursales</a>
-                        <a class="collapse-item" href="../branches/registerBranches.php">Registrar sucursales</a>
+                        <a class="collapse-item" href="../branches/registerBranch.php">Registrar sucursales</a>
                     </div>
                 </div>
             </li>

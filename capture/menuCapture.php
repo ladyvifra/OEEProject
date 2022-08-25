@@ -3,9 +3,68 @@
 session_start();
 
 extract($_REQUEST);
+require "../connectiondb.php";
 
-if(!isset($_SESSION['user']))
-    header("location:login/login.php?x=2");
+$objectConnection = Connect();
+//buscar infromaicón de usuario
+$sql="SELECT us_id  FROM user WHERE us_nickname='$_SESSION[user]' ";
+$result=$objectConnection->query($sql);
+$user=$result->fetch_object();
+$usId=$user->us_id;
+
+
+$capt_start=$_REQUEST['displayDateTime'];
+$ord_num= $_REQUEST['order'];
+
+//búsqueda órden de producción
+$sql3="SELECT ord_id, ord_num, ord_date, ord_quantityProg, ord_timeEst, comp_nit, us_id, mach_id, prod_id 
+FROM order_production 
+WHERE ord_num='$_REQUEST[order]'";
+ 
+$result3=$objectConnection->query($sql3);
+$order=$result3->fetch_object();
+$ordId=$order->ord_id;
+
+
+//Insertar nueva captura de producción 
+$sql1 ="INSERT INTO capture_production(capt_start, us_id, ord_id)
+VALUES('$capt_start',$usId,$ordId)";
+$result1 = $objectConnection->query($sql1);
+//búsqueda tipos de parada
+
+ $sql2="SELECT stop_id, stop_name, stop_description, comp_nit  FROM stop_production 
+WHERE comp_nit='$_SESSION[companyNit]'";
+$result2=$objectConnection->query($sql2);
+
+$arrayStops=[];
+
+
+while ($stops = mysqli_fetch_assoc($result2)) {
+  $arrayStops[]= $stops; 
+}
+
+//búsqueda tipos de fallas de calidad
+$sql6="SELECT fault_id, fault_name, fault_description, comp_nit  FROM fault_production 
+WHERE comp_nit='$_SESSION[companyNit]'";
+$result6=$objectConnection->query($sql6);
+
+$arrayFaults=[];
+
+
+while ($faults = mysqli_fetch_assoc($result6)) {
+  $arrayFaults[]= $faults; 
+}
+//búsqueda producto
+$sql4="SELECT prod_id, prod_name FROM product p INNER JOIN  company c ON p.comp_nit=c.comp_nit
+WHERE p.comp_nit='$_SESSION[companyNit]'";
+ 
+$result1=$objectConnection->query($sql4);
+
+//búsqueda máquina
+$sql5="SELECT mach_id, mach_name FROM machine m INNER JOIN  company c ON m.comp_nit=c.comp_nit
+WHERE m.comp_nit='$_SESSION[companyNit]'";
+ 
+$result2=$objectConnection->query($sql5);
 
 
 ?>
@@ -21,22 +80,25 @@ if(!isset($_SESSION['user']))
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Menú principal</title>
+    <title>Register Order Production </title>
 
     <!-- Custom fonts for this template-->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="css/sb-admin-2.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/styleRede.css">
+    <link href="../css/sb-admin-2.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styleRede.css">
+    <link rel="stylesheet"href=../css/registerProduct.css>
+    <link rel="stylesheet"href=css/styleCopy.css>
 
 </head>
 
 <body id="page-top">
-
+<?php include 'modalReporStop.php';?> 
+<?php include 'modalFault.php';?> 
     <!-- Page Wrapper -->
     <div id="wrapper">
 
@@ -44,7 +106,7 @@ if(!isset($_SESSION['user']))
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a href="mainMenu.php" class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a href="../mainMenu.php" class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-lightbulb"></i>
                 </div>
@@ -64,36 +126,8 @@ if(!isset($_SESSION['user']))
                 <div id="collapseUsers" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         
-                        <a class="collapse-item" href="users/viewUsers.php">Ver usuarios</a>
-                        <a class="collapse-item" href="users/userSignup.php">Registrar usuario</a>
-                    </div>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseShifts"
-                    aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-clock"></i>
-                    <span>Horarios</span>
-                </a>
-                <div id="collapseShifts" class="collapse" aria-labelledby="headingUtilities"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="shift/viewShifts.php">Ver horarios</a>
-                        <a class="collapse-item" href="shift/registerShifts.php">Registrar horario</a>
-                    </div>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBranches"
-                    aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-building"></i>
-                    <span>Sucursales</span>
-                </a>
-                <div id="collapseBranches" class="collapse" aria-labelledby="headingUtilities"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="branches/viewBranches.php">Ver sucursales</a>
-                        <a class="collapse-item" href="branches/registerBranches.php">Registrar sucursales</a>
+                        <a class="collapse-item" href="../users/viewUsers.php">Ver usuarios</a>
+                        <a class="collapse-item" href="../users/userSignup.php">Registrar usuario</a>
                     </div>
                 </div>
             </li>
@@ -116,8 +150,8 @@ if(!isset($_SESSION['user']))
                 <div id="collapseProducts" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         
-                        <a class="collapse-item" href="products/viewProducts.php">Ver productos</a>
-                        <a class="collapse-item" href="products/registerProduct.php">Registrar producto</a>
+                        <a class="collapse-item" href="../products/viewProducts.php">Ver productos</a>
+                        <a class="collapse-item" href="../products/registerProduct.php">Registrar producto</a>
                     </div>
                 </div>
             </li>
@@ -132,8 +166,8 @@ if(!isset($_SESSION['user']))
                 <div id="collapseStops" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         
-                        <a class="collapse-item" href="stops/viewProducts.php">Ver paradas</a>
-                        <a class="collapse-item" href="stops/registerStopProduction.php">Registrar parada</a>
+                        <a class="collapse-item" href="../stops/viewProducts.php">Ver paradas</a>
+                        <a class="collapse-item" href="../stops/registerStopProduction.php">Registrar parada</a>
                     </div>
                 </div>
             </li>
@@ -148,8 +182,8 @@ if(!isset($_SESSION['user']))
                 <div id="collapseMachines" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="machines/viewMachines.php">Ver máquinas</a>
-                        <a class="collapse-item" href="machines/registerMachine.php">Registrar máquina</a>
+                        <a class="collapse-item" href="../machines/viewMachines.php">Ver máquinas</a>
+                        <a class="collapse-item" href="../machines/registerMachine.php">Registrar máquina</a>
                     </div>
                 </div>
             </li>
@@ -162,27 +196,40 @@ if(!isset($_SESSION['user']))
                 <div id="collapseFaults" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="faults/viewFaults.php">Ver fallas</a>
-                        <a class="collapse-item" href="faults/registerFault.php">Registrar falla</a>
+                        <a class="collapse-item" href="../faults/viewFaults.php">Ver fallas</a>
+                        <a class="collapse-item" href="../faults/registerFault.php">Registrar falla</a>
                     </div>
                 </div>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseVelocity"
-                    aria-expanded="true" aria-controls="collapseVelocity">
-                    <i class="fas fa-fw fa-bolt"></i>
-                    <span>Velocidades</span>
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseShifts"
+                    aria-expanded="true" aria-controls="collapseUtilities">
+                    <i class="fas fa-fw fa-clock"></i>
+                    <span>Horarios</span>
                 </a>
-                <div id="collapseVelocity" class="collapse" aria-labelledby="headingUtilities"
+                <div id="collapseShifts" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="velocity/viewVelocity.php">Ver velocidades</a>
-                        <a class="collapse-item" href="velocity/registerVelocity.php">Registrar velocidades</a>
+                        <a class="collapse-item" href="viewShifts.php">Ver horarios</a>
+                        <a class="collapse-item" href=".registerShifts.php">Registrar horario</a>
                     </div>
                 </div>
             </li>
-            
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBranches"
+                    aria-expanded="true" aria-controls="collapseUtilities">
+                    <i class="fas fa-fw fa-building"></i>
+                    <span>Sucursales</span>
+                </a>
+                <div id="collapseBranches" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="../branches/viewBranches.php">Ver sucursales</a>
+                        <a class="collapse-item" href="../branches/registerBranch.php">Registrar sucursales</a>
+                    </div>
+                </div>
+            </li>
 
             <!-- Divider -->
             <hr class="sidebar-divider">
@@ -193,56 +240,39 @@ if(!isset($_SESSION['user']))
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item ">
-                <a class="nav-link" href="orders/registerOrder.php" >
+            <li class="nav-item active">
+                <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true"
+                    aria-controls="collapsePages">
                     <i class="fas fa-fw fa-folder"></i>
-                    <span>Registrar orden de producción</span>
+                    <span>Pages</span>
                 </a>
+                <div id="collapsePages" class="collapse show" aria-labelledby="headingPages"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Login Screens:</h6>
+                        <a class="collapse-item" href="login.html">Login</a>
+                        <a class="collapse-item" href="register.html">Register</a>
+                        <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
+                        <div class="collapse-divider"></div>
+                        <h6 class="collapse-header">Other Pages:</h6>
+                        <a class="collapse-item" href="404.html">404 Page</a>
+                        <a class="collapse-item active" href="blank.html">Blank Page</a>
+                    </div>
+                </div>
             </li>
 
             <!-- Nav Item - Charts -->
             <li class="nav-item">
                 <a class="nav-link" href="charts.html">
                     <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Ver ordenes de producción</span></a>
-            </li>
-
-            <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <a class="nav-link" href="capture/selectCapture.php">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Registrar captura de producción</span></a>
-            </li>
-
-             <!-- Divider -->
-             <hr class="sidebar-divider">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Reportes
-            </div>
-
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item ">
-                <a class="nav-link" href="#" >
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>Ver OEE</span>
-                </a>
-                
-            </li>
-
-            <!-- Nav Item - Charts -->
-            <li class="nav-item">
-                <a class="nav-link" href="charts.html">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Análisis OEE</span></a>
+                    <span>Charts</span></a>
             </li>
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
                 <a class="nav-link" href="tables.html">
                     <i class="fas fa-fw fa-table"></i>
-                    <span>Históricos</span></a>
+                    <span>Tables</span></a>
             </li>
 
             <!-- Divider -->
@@ -263,7 +293,7 @@ if(!isset($_SESSION['user']))
             <?php
        $x=isset($_REQUEST['user']);
       if($x){  
-        echo "<script>alert('El usuario se ha registrado correctamente')</script>";
+        echo "<script>alert('El horario se ha registrado correctamente')</script>";
           }
 
     ?>
@@ -450,21 +480,72 @@ if(!isset($_SESSION['user']))
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
-                <section class="column m2-2">
-            <h1><?php echo $_SESSION['company'];?></h1>
-                <div class="row-2">
-                <div class="col bienvenida">
-                        <h3> Estimado usuario, bienvenido a nuestro sistema de información Smart OEE</h3>
+                    <section class="column m2-2">
+                        <h1><?php echo $_SESSION['company'];?></h1>
+                        <?php
+                        $x=isset($_REQUEST['user']);
+                        if($x=='fail'){  
+                            echo "<h3 style='color:red'>No se ha podido registar el horario correctamente, verifique los campos </h3>";
+                            }
 
-                    </div>  
-                <div class="col">
-                        <img class="imagen im-m2"  src="assets/john-schnobrich-FlPc9_VocJ4-unsplash.jpg" />
+                        ?>
+                    <div class="container">
+                        <div class="row header">
+                            <h1>Captura de producción  &nbsp;</h1>
+                        </div>
+                         <div class="row body">
+                            <form role="form" name="formFaults" method="post" action = "validateOrderForm.php">
+                                <div class="row">
+                                        <p>Número de orden: <?php echo $ord_num;?></p>
+                                </div>
 
+                                <div class="row">
+                                    
+                                    <div class="col-4">
+                                        <img class="rounded-circle info three-columns"src="../assets/stop.png" id="info" style="width: 32%;
+                                        display: inline-block;">
+                                        <p>
+                                            <a id= "modal_view_user "class ="link_view view_user" 
+                                            href="#" data-toggle="modal" data-target="#modalRepStop" data-dismiss="modal" data-backdrop="false">Reportar parada de máquina</a>
+                                        </p>
+
+                                    </div>
+                                    <div class="col-4">
+                                            <img class="rounded-circle three-columns"src="../assets/error-message.png" name="login" style="width: 32%;
+                                            display: inline-block;">
+                                            <p>
+                                                <a id= "modal_view_user "class ="link_view view_user" 
+                                            href="#" data-toggle="modal" data-target="#modalFault" data-dismiss="modal" data-backdrop="false">Registrar falla de calidad</a>
+                                            </p>
+                                    </div>
+                                    <div class="col-4">
+                                            <img class="rounded-circle three-columns"src="../assets/count.png" name="signup" style="width: 32%;
+                                            display: inline-block;">
+                                            <p>
+                                                <a class="btn-secundary" href="../OEEProject/company/companySignup.php" role="button" id="signup">Registrar total productos fabricados</a>
+                                            </p>
+                                    </div>
+                                </div>
+                        
+                                    
+                                <div class="row">
+                                        <p> Si ya terminó de registrar la captura de producción, de clic en "Finalizar"
+                                       
+                                
+                                </div> 
+                                <div class="row">
+                                        
+                                        <input class="btn btn-submit" type="submit" value="Finalizar" />
+                                        <small>or press <strong>enter</strong></small>
+                                
+                                </div>        
+                        
+                            </form>  
+                        </div>
                     </div>
-                   
-                </div>
 
-            </section>
+
+                    </section>
 
                 </div>
                 <!-- /.container-fluid -->
@@ -510,22 +591,22 @@ if(!isset($_SESSION['user']))
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login/logout.php">Logout</a>
+                    <a class="btn btn-primary" href="login.html">Logout</a>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../vendor/jquery/jquery.min.js"></script>
+    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
+    <script src="../js/sb-admin-2.min.js"></script>
 
 </body>
 
-</html>
+</html

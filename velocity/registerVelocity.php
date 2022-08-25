@@ -3,9 +3,20 @@
 session_start();
 
 extract($_REQUEST);
+require "../connectiondb.php";
 
-if(!isset($_SESSION['user']))
-    header("location:login/login.php?x=2");
+$objectConnection = Connect();
+
+$sql1="SELECT prod_id, prod_name FROM product p INNER JOIN  company c ON p.comp_nit=c.comp_nit
+WHERE p.comp_nit='$_SESSION[companyNit]'";
+     
+$result1=$objectConnection->query($sql1);
+    
+    
+$sql2="SELECT mach_id, mach_name FROM machine m INNER JOIN  company c ON m.comp_nit=c.comp_nit
+WHERE m.comp_nit='$_SESSION[companyNit]'";
+     
+$result2=$objectConnection->query($sql2);
 
 
 ?>
@@ -21,17 +32,18 @@ if(!isset($_SESSION['user']))
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Menú principal</title>
+    <title>Register Velocity</title>
 
     <!-- Custom fonts for this template-->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="::/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="css/sb-admin-2.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/styleRede.css">
+    <link href="../css/sb-admin-2.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styleRede.css">
+    <link rel="stylesheet"href=../css/registerProduct.css>
 
 </head>
 
@@ -44,7 +56,7 @@ if(!isset($_SESSION['user']))
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a href="mainMenu.php" class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a href="../mainMenu.php" class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-lightbulb"></i>
                 </div>
@@ -64,8 +76,8 @@ if(!isset($_SESSION['user']))
                 <div id="collapseUsers" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         
-                        <a class="collapse-item" href="users/viewUsers.php">Ver usuarios</a>
-                        <a class="collapse-item" href="users/userSignup.php">Registrar usuario</a>
+                        <a class="collapse-item" href="../users/viewUsers.php">Ver usuarios</a>
+                        <a class="collapse-item" href="../users/userSignup.php">Registrar usuario</a>
                     </div>
                 </div>
             </li>
@@ -78,8 +90,8 @@ if(!isset($_SESSION['user']))
                 <div id="collapseShifts" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="shift/viewShifts.php">Ver horarios</a>
-                        <a class="collapse-item" href="shift/registerShifts.php">Registrar horario</a>
+                        <a class="collapse-item" href="../shift/viewShifts.php">Ver horarios</a>
+                        <a class="collapse-item" href="../shift/registerShifts.php">Registrar horario</a>
                     </div>
                 </div>
             </li>
@@ -92,8 +104,8 @@ if(!isset($_SESSION['user']))
                 <div id="collapseBranches" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="branches/viewBranches.php">Ver sucursales</a>
-                        <a class="collapse-item" href="branches/registerBranches.php">Registrar sucursales</a>
+                        <a class="collapse-item" href="../branches/viewBranches.php">Ver sucursales</a>
+                        <a class="collapse-item" href="../branches/registerBranches.php">Registrar sucursales</a>
                     </div>
                 </div>
             </li>
@@ -169,12 +181,12 @@ if(!isset($_SESSION['user']))
             </li>
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseVelocity"
-                    aria-expanded="true" aria-controls="collapseVelocity">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseShifts"
+                    aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-fw fa-bolt"></i>
                     <span>Velocidades</span>
                 </a>
-                <div id="collapseVelocity" class="collapse" aria-labelledby="headingUtilities"
+                <div id="collapseShifts" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="velocity/viewVelocity.php">Ver velocidades</a>
@@ -209,7 +221,7 @@ if(!isset($_SESSION['user']))
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="capture/selectCapture.php">
+                <a class="nav-link" href="tables.html">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Registrar captura de producción</span></a>
             </li>
@@ -435,7 +447,7 @@ if(!isset($_SESSION['user']))
                                     Activity Log
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a href="../login/logout.php" class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                <a href="login/logout.php" class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>
@@ -452,17 +464,112 @@ if(!isset($_SESSION['user']))
 
                 <section class="column m2-2">
             <h1><?php echo $_SESSION['company'];?></h1>
-                <div class="row-2">
-                <div class="col bienvenida">
-                        <h3> Estimado usuario, bienvenido a nuestro sistema de información Smart OEE</h3>
+            <?php
+       $x=isset($_REQUEST['user']);
+      if($x=='fail'){  
+        echo "<h3 style='color:red'>No se ha podido registar el horario correctamente, verifique los campos </h3>";
+          }
 
-                    </div>  
-                <div class="col">
-                        <img class="imagen im-m2"  src="assets/john-schnobrich-FlPc9_VocJ4-unsplash.jpg" />
-
+    ?>
+                <div class="container">
+                    
+               
+                    <div class="row header">
+                        <h1>Registrar velocidades  &nbsp;</h1>
+                        
                     </div>
-                   
-                </div>
+                    <div class="row body">
+                        <form role="form" name="formFaults" method="post" action = "validateVelocity.php">
+                        <ul>
+                        <p align="left"> Estimado ususario, antes de registrar una velocidad, asegúrese primero de registrar las máquinas y los productos.</p> 
+                            
+
+                            <li>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <p >
+                                        <label for="machine">
+                                                            Seleccione la máquina
+                                                </label>
+                                    
+                                                <select name="machine" id="machine" class="Machine">
+                                                    <option value="0">Seleccione</option>
+                                                        <?php
+                                                            while($machine=$result2->fetch_object())
+
+                                                                {
+                                                                    ?>
+                                                                <option value="<?php echo $machine->mach_id; ?>"><?php echo $machine->mach_name;?></option>
+                                                        <?php    
+                                                            }
+                                                                ?>
+
+        
+                                                </select>
+                                        </p>
+
+                                </div>
+                                <div class="col-6">
+                                    <p>
+                                        <label for="machine">
+                                                            Seleccione el producto
+                                        </label>
+                                    
+                                                <select name="product" id="product" class="Product">
+                                                    <option value="0">Seleccione</option>
+                                                        <?php
+                                                            while($product=$result1->fetch_object())
+
+                                                                {
+                                                                    ?>
+                                                                <option value="<?php echo $product->prod_id; ?>"><?php echo $product->prod_name;?></option>
+                                                        <?php    
+                                                            }
+                                                                ?>
+
+        
+                                                </select>
+                                    </p>
+
+                                    </div>
+                 
+                            </li>
+                            <li>
+                            <p> Velocidad : </p>
+                                <div class="row">
+                                    
+                                    
+                                    <div class="col-5">
+                                    <p>
+                                            <label for="units">Unidades</label>
+                                            <input type="text" name="units" id= "units"/>
+                                        </p>
+                                    </div>   
+                                    <div class="col-2">
+                                        <p>
+                                          por
+                                        </p>
+                                    </div>
+                                                        
+                                    <div class="col-5">
+                                    <p>
+                                            <label for="minutes">Minutos</label>
+                                            <input type="text" name="minutes" id="minutes" />
+                                        </p>
+                                    </div>     
+                                </div>                 
+                            </li>
+
+                            <li>
+                                <input class="btn btn-submit" type="submit" value="Submit" />
+                                <small>or press <strong>enter</strong></small>
+                            </li>
+                            
+                        </ul>
+                        </form>  
+                    </div>
+                    </div>
+
 
             </section>
 
@@ -517,14 +624,14 @@ if(!isset($_SESSION['user']))
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../vendor/jquery/jquery.min.js"></script>
+    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
+    <script src="../js/sb-admin-2.min.js"></script>
 
 </body>
 

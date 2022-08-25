@@ -27,8 +27,8 @@ window.addEventListener("load", function(event) {
           
           console.log(userEdit)
           e=userEdit.split('//');
-          console.log("papi",e);
-          ;
+        
+          
           $("#idUser").val(e[0]);
           $("#formIdEdit").val(e[3]);
           $("#formNameEdit").val(e[1]);
