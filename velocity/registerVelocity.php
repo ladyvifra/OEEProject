@@ -35,7 +35,7 @@ $result2=$objectConnection->query($sql2);
     <title>Register Velocity</title>
 
     <!-- Custom fonts for this template-->
-    <link href="::/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
@@ -105,7 +105,7 @@ $result2=$objectConnection->query($sql2);
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="../branches/viewBranches.php">Ver sucursales</a>
-                        <a class="collapse-item" href="../branches/registerBranches.php">Registrar sucursales</a>
+                        <a class="collapse-item" href="../branches/registerBranch.php">Registrar sucursales</a>
                     </div>
                 </div>
             </li>
@@ -128,8 +128,8 @@ $result2=$objectConnection->query($sql2);
                 <div id="collapseProducts" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         
-                        <a class="collapse-item" href="products/viewProducts.php">Ver productos</a>
-                        <a class="collapse-item" href="products/registerProduct.php">Registrar producto</a>
+                        <a class="collapse-item" href="../products/viewProducts.php">Ver productos</a>
+                        <a class="collapse-item" href="../products/registerProduct.php">Registrar producto</a>
                     </div>
                 </div>
             </li>
@@ -144,8 +144,8 @@ $result2=$objectConnection->query($sql2);
                 <div id="collapseStops" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         
-                        <a class="collapse-item" href="stops/viewProducts.php">Ver paradas</a>
-                        <a class="collapse-item" href="stops/registerStopProduction.php">Registrar parada</a>
+                        <a class="collapse-item" href="../stops/viewStops.php">Ver paradas</a>
+                        <a class="collapse-item" href="../stops/registerStopProduction.php">Registrar parada</a>
                     </div>
                 </div>
             </li>
@@ -160,8 +160,8 @@ $result2=$objectConnection->query($sql2);
                 <div id="collapseMachines" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="machines/viewMachines.php">Ver máquinas</a>
-                        <a class="collapse-item" href="machines/registerMachine.php">Registrar máquina</a>
+                        <a class="collapse-item" href="../machines/viewMachines.php">Ver máquinas</a>
+                        <a class="collapse-item" href="../machines/registerMachine.php">Registrar máquina</a>
                     </div>
                 </div>
             </li>
@@ -174,23 +174,23 @@ $result2=$objectConnection->query($sql2);
                 <div id="collapseFaults" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="faults/viewFaults.php">Ver fallas</a>
-                        <a class="collapse-item" href="faults/registerFault.php">Registrar falla</a>
+                        <a class="collapse-item" href="../faults/viewFaults.php">Ver fallas</a>
+                        <a class="collapse-item" href="../faults/registerFault.php">Registrar falla</a>
                     </div>
                 </div>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseShifts"
-                    aria-expanded="true" aria-controls="collapseUtilities">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseVelocity"
+                    aria-expanded="true" aria-controls="collapseVelocity">
                     <i class="fas fa-fw fa-bolt"></i>
                     <span>Velocidades</span>
                 </a>
-                <div id="collapseShifts" class="collapse" aria-labelledby="headingUtilities"
+                <div id="collapseVelocity" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="velocity/viewVelocity.php">Ver velocidades</a>
-                        <a class="collapse-item" href="velocity/registerVelocity.php">Registrar velocidades</a>
+                        <a class="collapse-item" href="viewVelocity.php">Ver velocidades</a>
+                        <a class="collapse-item" href="registerVelocity.php">Registrar velocidades</a>
                     </div>
                 </div>
             </li>
@@ -206,7 +206,7 @@ $result2=$objectConnection->query($sql2);
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item ">
-                <a class="nav-link" href="orders/registerOrder.php" >
+                <a class="nav-link" href="../orders/registerOrder.php" >
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Registrar orden de producción</span>
                 </a>
@@ -214,14 +214,14 @@ $result2=$objectConnection->query($sql2);
 
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="charts.html">
+                <a class="nav-link" href="../orders/viewOrders.php">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Ver ordenes de producción</span></a>
             </li>
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="tables.html">
+                <a class="nav-link" href="../capture/selectCapture.php">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Registrar captura de producción</span></a>
             </li>
@@ -236,7 +236,7 @@ $result2=$objectConnection->query($sql2);
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item ">
-                <a class="nav-link" href="#" >
+                <a class="nav-link" href="../OEE/viewOEE.php" >
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Ver OEE</span>
                 </a>
@@ -267,6 +267,7 @@ $result2=$objectConnection->query($sql2);
 
         </ul>
         <!-- End of Sidebar -->
+
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -395,7 +396,7 @@ $result2=$objectConnection->query($sql2);
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_3.svg"
+                                        <img class="rounded-circle" src="../img/undraw_profile_3.svg"
                                             alt="...">
                                         <div class="status-indicator bg-warning"></div>
                                     </div>
@@ -429,7 +430,7 @@ $result2=$objectConnection->query($sql2);
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $_SESSION['user'];?></span>
                                 <img class="img-profile rounded-circle"
-                                    src="img/undraw_profile.svg">
+                                    src="../img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -447,7 +448,7 @@ $result2=$objectConnection->query($sql2);
                                     Activity Log
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a href="login/logout.php" class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                <a href="../login/logout.php" class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>
@@ -617,7 +618,7 @@ $result2=$objectConnection->query($sql2);
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login/logout.php">Logout</a>
+                    <a class="btn btn-primary" href="../login/logout.php">Logout</a>
                 </div>
             </div>
         </div>

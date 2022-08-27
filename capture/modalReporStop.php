@@ -19,7 +19,7 @@ window.addEventListener("load", function(event) {
 });
 
 
-// funcion para Cargar sucursales al campo <select>
+// funcion para Cargar paradas al campo <select>
 function cargar_paradas() {
  addOptions("stops", stops);
 }
@@ -68,7 +68,7 @@ $('#'+domElement).empty();
                                   
                     <div class="md-form mb-5">
                         <label data-error="wrong" data-success="right" for="formOfficeEdit">Tipo de parada</label>
-                            <select class="Stops" name="stops" id="stops">
+                            <select class="stops" name="stops" id="stops">
                                 
                             </select>
                     </div>

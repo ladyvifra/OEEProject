@@ -12,7 +12,7 @@
     <title>Registrar empresa</title>
     
     
-    <link rel="stylesheet"href=../css/style.css>
+    <link rel="stylesheet"href=../css/styleCopy.css>
     <link rel="stylesheet"href=../css/registerProduct.css>
 </head>
 <body>

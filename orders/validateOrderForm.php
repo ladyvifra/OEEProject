@@ -12,7 +12,7 @@ $idBranch='NULL';
     $idBranch=$_REQUEST['branch'];
 }
 
-echo $sql="SELECT us_id  FROM user WHERE us_nickname='$_SESSION[user]' ";
+echo $sql="SELECT us_id  FROM user WHERE us_name='$_SESSION[user]' ";
 $result=$objConnection->query($sql);
 $user=$result->fetch_object();
 $usId=$user->us_id;
@@ -43,12 +43,13 @@ echo ($sql2);
 $result2 = $objConnection->query($sql2);
 
 if($result){
-   // echo "<script>alert('El usuario se ha registrado correctamente')</script>";
-   header('location:../mainMenu.php?user=true');
-}else
-{
-    //echo "<script>alert('Se ha presentado un problema al registrar usuario') </sript>";
-    header('locaction:registerOrder.php?user=fail');
-}
+    // echo "<script>alert('El usuario se ha registrado correctamente')</script>";
+     header('location:../mainMenu.php?user=true');
+ }else
+ {
+     //echo "<script>alert('Se ha presentado un problema al registrar usuario') </sript>";
+     header('locaction:registerOrder.php?user=fail');
+ }
+
 
 ?>

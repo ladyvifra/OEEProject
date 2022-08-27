@@ -93,7 +93,7 @@ if(!isset($_SESSION['user']))
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="branches/viewBranches.php">Ver sucursales</a>
-                        <a class="collapse-item" href="branches/registerBranches.php">Registrar sucursales</a>
+                        <a class="collapse-item" href="branches/registerBranch.php">Registrar sucursales</a>
                     </div>
                 </div>
             </li>
@@ -132,7 +132,7 @@ if(!isset($_SESSION['user']))
                 <div id="collapseStops" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         
-                        <a class="collapse-item" href="stops/viewProducts.php">Ver paradas</a>
+                        <a class="collapse-item" href="stops/viewStops.php">Ver paradas</a>
                         <a class="collapse-item" href="stops/registerStopProduction.php">Registrar parada</a>
                     </div>
                 </div>
@@ -224,7 +224,7 @@ if(!isset($_SESSION['user']))
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item ">
-                <a class="nav-link" href="#" >
+                <a class="nav-link" href="OEE/viewOEE.php" >
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Ver OEE</span>
                 </a>
@@ -435,7 +435,7 @@ if(!isset($_SESSION['user']))
                                     Activity Log
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a href="../login/logout.php" class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                <a href="login/logout.php" class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>

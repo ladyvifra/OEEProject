@@ -21,7 +21,7 @@ if(!isset($_SESSION['user']))
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Ver Horarios</title>
+    <title>View OEE</title>
 
     <!-- Custom fonts for this template-->
     <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -78,8 +78,8 @@ if(!isset($_SESSION['user']))
                 <div id="collapseShifts" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="viewShifts.php">Ver horarios</a>
-                        <a class="collapse-item" href="registerShifts.php">Registrar horario</a>
+                        <a class="collapse-item" href="../shift/viewShifts.php">Ver horarios</a>
+                        <a class="collapse-item" href="../shift/registerShifts.php">Registrar horario</a>
                     </div>
                 </div>
             </li>
@@ -224,7 +224,7 @@ if(!isset($_SESSION['user']))
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item ">
-                <a class="nav-link" href="../OEE/viewOEE.php" >
+                <a class="nav-link" href="viewOEE.php" >
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Ver OEE</span>
                 </a>
@@ -517,14 +517,14 @@ if(!isset($_SESSION['user']))
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="../vendor/jquery/jquery.min.js"></script>
-    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="../js/sb-admin-2.min.js"></script>
+    <script src="js/sb-admin-2.min.js"></script>
 
 </body>
 

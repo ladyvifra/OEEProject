@@ -36,7 +36,7 @@ $objectConnection = Connect();
     <!-- Custom styles for this template-->
     <link href="../css/sb-admin-2.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/styleRede.css">
-    <link rel="stylesheet"href=../css/registerProduct.css>
+    <link rel="stylesheet"href="../css/registerProduct.css">
 
 </head>
 
@@ -49,7 +49,7 @@ $objectConnection = Connect();
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a href="mainMenu.php" class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a href="../mainMenu.php" class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-lightbulb"></i>
                 </div>
@@ -69,8 +69,36 @@ $objectConnection = Connect();
                 <div id="collapseUsers" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         
-                        <a class="collapse-item" href="../user/viewUsers.php">Ver usuarios</a>
-                        <a class="collapse-item" href="../userSignup.php">Registrar usuario</a>
+                        <a class="collapse-item" href="../users/viewUsers.php">Ver usuarios</a>
+                        <a class="collapse-item" href="../users/userSignup.php">Registrar usuario</a>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseShifts"
+                    aria-expanded="true" aria-controls="collapseUtilities">
+                    <i class="fas fa-fw fa-clock"></i>
+                    <span>Horarios</span>
+                </a>
+                <div id="collapseShifts" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="../shift/viewShifts.php">Ver horarios</a>
+                        <a class="collapse-item" href="../shift/registerShifts.php">Registrar horario</a>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBranches"
+                    aria-expanded="true" aria-controls="collapseUtilities">
+                    <i class="fas fa-fw fa-building"></i>
+                    <span>Sucursales</span>
+                </a>
+                <div id="collapseBranches" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="../branches/viewBranches.php">Ver sucursales</a>
+                        <a class="collapse-item" href="../branches/registerBranch.php">Registrar sucursales</a>
                     </div>
                 </div>
             </li>
@@ -109,8 +137,8 @@ $objectConnection = Connect();
                 <div id="collapseStops" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         
-                        <a class="collapse-item" href="../products/viewProducts.php">Ver paradas</a>
-                        <a class="collapse-item" href="../products/StopProduction.php">Registrar parada</a>
+                        <a class="collapse-item" href="../stops/viewStops.php">Ver paradas</a>
+                        <a class="collapse-item" href="../stops/registerStopProduction.php">Registrar parada</a>
                     </div>
                 </div>
             </li>
@@ -146,33 +174,20 @@ $objectConnection = Connect();
             </li>
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseShifts"
-                    aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-clock"></i>
-                    <span>Horarios</span>
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseVelocity"
+                    aria-expanded="true" aria-controls="collapseVelocity">
+                    <i class="fas fa-fw fa-bolt"></i>
+                    <span>Velocidades</span>
                 </a>
-                <div id="collapseShifts" class="collapse" aria-labelledby="headingUtilities"
+                <div id="collapseVelocity" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="../shift/viewShifts.php">Ver horarios</a>
-                        <a class="collapse-item" href="../shift/registerShifts.php">Registrar horario</a>
+                        <a class="collapse-item" href="../velocity/viewVelocity.php">Ver velocidades</a>
+                        <a class="collapse-item" href="../velocity/registerVelocity.php">Registrar velocidades</a>
                     </div>
                 </div>
             </li>
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBranches"
-                    aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-building"></i>
-                    <span>Sucursales</span>
-                </a>
-                <div id="collapseBranches" class="collapse" aria-labelledby="headingUtilities"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="../branches/viewBranches.php">Ver sucursales</a>
-                        <a class="collapse-item" href="../branches/registerBranch.php">Registrar sucursales</a>
-                    </div>
-                </div>
-            </li>
+            
 
             <!-- Divider -->
             <hr class="sidebar-divider">
@@ -183,39 +198,56 @@ $objectConnection = Connect();
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item active">
-                <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true"
-                    aria-controls="collapsePages">
+            <li class="nav-item ">
+                <a class="nav-link" href="../orders/registerOrder.php" >
                     <i class="fas fa-fw fa-folder"></i>
-                    <span>Pages</span>
+                    <span>Registrar orden de producción</span>
                 </a>
-                <div id="collapsePages" class="collapse show" aria-labelledby="headingPages"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Login Screens:</h6>
-                        <a class="collapse-item" href="login.html">Login</a>
-                        <a class="collapse-item" href="register.html">Register</a>
-                        <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
-                        <div class="collapse-divider"></div>
-                        <h6 class="collapse-header">Other Pages:</h6>
-                        <a class="collapse-item" href="404.html">404 Page</a>
-                        <a class="collapse-item active" href="blank.html">Blank Page</a>
-                    </div>
-                </div>
+            </li>
+
+            <!-- Nav Item - Charts -->
+            <li class="nav-item">
+                <a class="nav-link" href="../orders/viewOrders.php">
+                    <i class="fas fa-fw fa-chart-area"></i>
+                    <span>Ver ordenes de producción</span></a>
+            </li>
+
+            <!-- Nav Item - Tables -->
+            <li class="nav-item">
+                <a class="nav-link" href="../capture/selectCapture.php">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Registrar captura de producción</span></a>
+            </li>
+
+             <!-- Divider -->
+             <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Reportes
+            </div>
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item ">
+                <a class="nav-link" href="../OEE/viewOEE.php" >
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Ver OEE</span>
+                </a>
+                
             </li>
 
             <!-- Nav Item - Charts -->
             <li class="nav-item">
                 <a class="nav-link" href="charts.html">
                     <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Charts</span></a>
+                    <span>Análisis OEE</span></a>
             </li>
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
                 <a class="nav-link" href="tables.html">
                     <i class="fas fa-fw fa-table"></i>
-                    <span>Tables</span></a>
+                    <span>Históricos</span></a>
             </li>
 
             <!-- Divider -->
@@ -228,6 +260,7 @@ $objectConnection = Connect();
 
         </ul>
         <!-- End of Sidebar -->
+
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -390,7 +423,7 @@ $objectConnection = Connect();
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $_SESSION['user'];?></span>
                                 <img class="img-profile rounded-circle"
-                                    src="img/undraw_profile.svg">
+                                    src="../img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
